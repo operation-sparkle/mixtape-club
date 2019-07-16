@@ -1,0 +1,22 @@
+{
+  "name": "mixtape-club",
+  "version": "1.0.0",
+  "description": "A modern app for throwback mixtapes",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/operation-sparkle/mixtape-club.git"
+  },
+  "keywords": [
+    "mixtape"
+  ],
+  "author": "Operation Sparkle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/operation-sparkle/mixtape-club/issues"
+  },
+  "homepage": "https://github.com/operation-sparkle/mixtape-club#readme"
+}
