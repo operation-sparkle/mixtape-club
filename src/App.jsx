@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginBox from './components/Login.jsx';
 import Navigation from './components/Navbar.jsx';
 import Search from './components/Search.jsx';
+import Hero from './components/Hero.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -16,10 +17,7 @@ class App extends React.Component {
         return (
             <div className="App">
             < Navigation />
-            <div className="hero">
-                <h1 id="title">Mixtape Club</h1>
-                <h2 id="subtitle">A Modern App for Creating and Sharing Throwback Mixtapes</h2>
-            </div>
+                < Hero />
                 < Search />
                 < LoginBox />
             <footer className="text-info bg-light">Created by Team Operation Sparkle.</footer>
