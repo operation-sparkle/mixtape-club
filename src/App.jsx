@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import axios from 'axios';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 import LoginBox from './components/Login.jsx';
 import Navigation from './components/Navbar.jsx';

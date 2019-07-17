@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker|Saira:400,700&display=swap');
 .App {
   margin: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Saira', Arial, Helvetica, sans-serif;
 }
 
 .hero {
