@@ -17,7 +17,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            searchResults: [{snippet: {title: 'Music is cool'}}],
+            searchResults: [{ snippet: { title: 'Music is cool' }, id: { videoId: '4D2qcbu26gs' }}],
             query: '',
         }
         this.onSearch = this.onSearch.bind(this);
