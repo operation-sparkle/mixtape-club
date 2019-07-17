@@ -22,8 +22,8 @@
 
 #title {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 3rem;
+  margin-top: 1rem;
+  font-size: 2rem;
   font-weight: bold;
   color: white;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, .6);
@@ -31,7 +31,7 @@
 
 #subtitle {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: white;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, .6);
@@ -42,12 +42,28 @@
 
 .card {
   box-shadow: .2rem .2rem .2rem rgba(0, 0, 0, .3);
-  max-width: 440px;
+  display: block;
+  margin: 1rem auto;
   text-align: center;
 }
 
 .search {
-  margin-bottom: 1rem;
+  display: block;
+  margin: 1rem auto;
+}
+
+.search-list {
+  display: block;
+  margin: 1rem auto;
+}
+
+.search-item:hover {
+  background-color: #a7dae7;
+}
+
+.playlist-builder {
+  margin: 1rem auto;
+  display: block;
 }
 
 footer {
@@ -62,7 +78,7 @@ footer {
   padding: 7.2rem 2rem 2rem 2rem;
   width: 110vw;
   height: 40vw;
-  margin: -3rem 0rem 1rem -3rem;
+  margin: -3rem 0rem 1rem -1rem;
 }
 
   #title {
