@@ -18,7 +18,32 @@ class App extends React.Component {
 
         this.state = {
             searchResults: ['song1', 'song2', 'song3'],
+            query: '',
         }
+        this.onSearch = this.onSearch.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onChange(event){
+        this.setState({
+            query: event.target.value,
+        })
+    }
+
+    onSearch(){
+        console.log(this.state.query);
+        let query = this.state.query;
+        axios.post('/search', {query})
+        .then((response)=>{
+            console.log(response);
+            debugger;
+            this.setState({
+                searchResults : response.items,
+            })
+        })
+        .catch((err)=> {
+            console.error('Error searching:', err)
+        })
     }
     render() {
         const { searchResults } = this.state;
@@ -26,7 +51,7 @@ class App extends React.Component {
             <div className="App">
             <Navigation />
                 <Hero />
-                <Search />
+                <Search onChange={this.onChange} onSearch={this.onSearch}/>
                 <LoginBox />
                 <SearchList searchResults={searchResults} />
                 <PlaylistImageSelector />

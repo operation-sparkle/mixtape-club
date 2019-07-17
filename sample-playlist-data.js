@@ -7,3 +7,4 @@ playlist = {
     aTitles: ["The Stone Roses - I Wanna Be Adored (Official Video)", "Doja Cat - Juicy (Audio)", "ROSALÍA - \"Malamente\" (Official Video) Download & stream “Malamente”"],
     bTitles: ["New Order - Age Of Consent", "Boy Harsher — Pain", "Total Control - Flesh War"],
 };
+
