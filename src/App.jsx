@@ -53,7 +53,7 @@ class App extends React.Component {
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container />
+                    <Container onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} />
                 </div>
             </Router>
         );

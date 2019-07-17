@@ -1,8 +1,21 @@
 import React from 'react';
 
-const CreateMixtapes = () => {
+import PlaylistImageSelector from './PlaylistImageSelector.jsx';
+import Search from './Search.jsx';
+import SearchList from './SearchList.jsx';
+import PlaylistBuilderList from './PlaylistBuilderList.jsx';
+
+const CreateMixtapes = (props) => {
+    const { searchResults, onSearch, onChange } = props;
+    console.log(props);
     return (
-        <div>Create Mixtapes Component</div>
+        <div>
+            <PlaylistImageSelector />
+            <Search onSearch={onSearch} onChange={onChange} />
+            <SearchList searchResults={searchResults} />
+            <PlaylistBuilderList />
+            <div>Create Mixtapes Component</div>
+        </div>
     )
 }
 
