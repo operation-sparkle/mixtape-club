@@ -66,24 +66,27 @@ app.get('/', (req, res) => {
 });
 
 app.post('/search', (req, res) => {
-    debugger;
+    let data;
     let queryString = req.body.query
-    axios({
-        method: 'GET',
-        url: 'https://www.googleapis.com/youtube/v3/search?part=snippet',
-            params: {
+    let url = 'https://www.googleapis.com/youtube/v3/search?part=snippet';
+    let options = {
+        params: {
             key: process.env.YOUTUBE_API_KEY,
             q: queryString,
             maxResults: 10,
             videoEmbeddable: true,
             type: 'video',
-            }
-        })
+        }
+    }
+       axios.get(url, options)
         .then((response)=> {
-            console.log(response);
+            data = response.data;
+            res.send(data);
+            
         })
         .catch((err)=> {
             console.log('Error searching youtube:', err);
+            res.send(err);
         })
     
 });

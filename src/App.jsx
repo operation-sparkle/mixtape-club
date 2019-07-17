@@ -33,8 +33,12 @@ class App extends React.Component {
         console.log(this.state.query);
         let query = this.state.query;
         axios.post('/search', {query})
-        .then(()=>{
-
+        .then((response)=>{
+            console.log(response);
+            debugger;
+            this.setState({
+                searchResults : response.items,
+            })
         })
         .catch((err)=> {
             console.error('Error searching:', err)
