@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 const LoginBox = () => {
     return (
         
-        <div className="card">
+        <div className="card col-sm-8 col-md-6">
             <div className="card-header">Login</div>
             <div className="card-body">
                 <h5 className="card-title">Welcome to Mixtape Club!</h5>

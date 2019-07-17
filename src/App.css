@@ -42,12 +42,19 @@
 
 .card {
   box-shadow: .2rem .2rem .2rem rgba(0, 0, 0, .3);
-  max-width: 440px;
+  display: block;
+  margin: 1rem auto;
   text-align: center;
 }
 
 .search {
-  margin-bottom: 1rem;
+  display: block;
+  margin: 1rem auto;
+}
+
+.search-list {
+  display: block;
+  margin: 1rem auto;
 }
 
 footer {
