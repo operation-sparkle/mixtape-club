@@ -16,8 +16,10 @@ class App extends React.Component {
         return (
             <div className="App">
             < Navigation />
+            <div className="hero">
                 <h1 id="title">Mixtape Club</h1>
                 <h2 id="subtitle">A Modern App for Creating and Sharing Throwback Mixtapes</h2>
+            </div>
                 < LoginBox />
             </div>
         );
