@@ -17,7 +17,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            searchResults: ['song1', 'song2', 'song3'],
+            searchResults: [{snippet: {title: 'Music is cool'}}],
             query: '',
         }
         this.onSearch = this.onSearch.bind(this);
@@ -36,9 +36,9 @@ class App extends React.Component {
         axios.post('/search', {query})
         .then((response)=>{
             console.log(response);
-            debugger;
+            // debugger;
             this.setState({
-                searchResults : response.items,
+                searchResults : response.data.items,
             })
         })
         .catch((err)=> {
