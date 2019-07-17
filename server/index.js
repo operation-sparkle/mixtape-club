@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const axios = require('axios');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
@@ -59,11 +60,33 @@ app.get('/auth/google/callback',
     });
 
 app.get('/', (req, res) => {
-    debugger;
+   
     console.log(req);
     res.render('/');
-})
+});
 
+app.post('/search', (req, res) => {
+    debugger;
+    let queryString = req.body.query
+    axios({
+        method: 'GET',
+        url: 'https://www.googleapis.com/youtube/v3/search?part=snippet',
+            params: {
+            key: process.env.YOUTUBE_API_KEY,
+            q: queryString,
+            maxResults: 10,
+            videoEmbeddable: true,
+            type: 'video',
+            }
+        })
+        .then((response)=> {
+            console.log(response);
+        })
+        .catch((err)=> {
+            console.log('Error searching youtube:', err);
+        })
+    
+});
 
 const PORT = 3000;
 
