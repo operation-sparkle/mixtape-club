@@ -52,12 +52,14 @@ app.get('/auth/google',
 
 // Redirect on success or failure
 app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }));
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+       res.redirect('http://localhost:3000/');
+       
+    });
 
 app.get('/', (req, res) => {
+    debugger;
     console.log(req);
     res.render('/');
 })
