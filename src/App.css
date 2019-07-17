@@ -57,6 +57,10 @@
   margin: 1rem auto;
 }
 
+.search-item:hover {
+  background-color: #a7dae7;
+}
+
 footer {
   height: 40px;
   padding: 1rem 2rem 2rem;
@@ -69,7 +73,7 @@ footer {
   padding: 7.2rem 2rem 2rem 2rem;
   width: 110vw;
   height: 40vw;
-  margin: -3rem 0rem 1rem -3rem;
+  margin: -3rem 0rem 1rem -1rem;
 }
 
   #title {
