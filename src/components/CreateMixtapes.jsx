@@ -9,7 +9,7 @@ const CreateMixtapes = (props) => {
     const { searchResults, onSearch, onChange } = props;
     console.log(props);
     return (
-        <div>
+        <div style={{marginTop: '4rem'}}>
             <PlaylistImageSelector />
             <Search onSearch={onSearch} onChange={onChange} />
             <SearchList searchResults={searchResults} />

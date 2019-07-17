@@ -18,6 +18,9 @@ const Navigation = () => {
                         <Link to="/create-mixtapes" className="nav-link">Create Mixtapes</Link>
                     </li>
                     <li className="nav-item">
+                        <Link to="/mixtape-player" className="nav-link">Mixtape Player</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link to="/login" className="nav-link">Login</Link>
                     </li>
                 </ul>
