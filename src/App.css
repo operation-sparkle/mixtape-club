@@ -45,6 +45,16 @@
   text-align: center;
 }
 
+.search {
+  margin-bottom: 1rem;
+}
+
+footer {
+  height: 40px;
+  padding: 1rem 2rem 2rem;
+  margin: 1rem -1rem 0rem;
+}
+
 /***** Medium devices (tablets, 768px and up) *****/
 @media (min-width: 768px) {
   .hero {

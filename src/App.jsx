@@ -23,6 +23,7 @@ class App extends React.Component {
             </div>
                 < Search />
                 < LoginBox />
+            <footer className="text-info bg-light">Created by Team Operation Sparkle.</footer>
             </div>
         );
     }
