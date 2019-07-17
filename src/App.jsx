@@ -7,6 +7,7 @@ import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 import LoginBox from './components/Login.jsx';
 import Navigation from './components/Navbar.jsx';
+import Search from './components/Search.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class App extends React.Component {
                 <h1 id="title">Mixtape Club</h1>
                 <h2 id="subtitle">A Modern App for Creating and Sharing Throwback Mixtapes</h2>
             </div>
+                < Search />
                 < LoginBox />
             </div>
         );
