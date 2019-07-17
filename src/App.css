@@ -1,6 +1,17 @@
 .App {
   margin: 1rem;
+  padding-top: 3rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+#title {
+  text-align: center;
+  font-size: 3rem;
+}
+
+#subtitle {
+  text-align: center;
+  font-size: 1.4rem;
 }
 
 .card {
