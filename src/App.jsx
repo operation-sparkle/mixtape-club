@@ -10,6 +10,7 @@ import Search from './components/Search.jsx';
 import Hero from './components/Hero.jsx';
 import SearchList from './components/SearchList.jsx';
 import PlaylistBuilderList from './components/PlaylistBuilderList.jsx';
+import PlaylistImageSelector from './components/PlaylistImageSelector.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class App extends React.Component {
                 <Search />
                 <LoginBox />
                 <SearchList searchResults={searchResults} />
+                <PlaylistImageSelector />
                 <PlaylistBuilderList />
             <footer className="text-info bg-light">Created by Team Operation Sparkle.</footer>
             </div>

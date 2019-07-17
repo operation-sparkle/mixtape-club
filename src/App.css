@@ -40,7 +40,7 @@
   margin: 0rem auto;
 }
 
-.card {
+.login-card {
   box-shadow: .2rem .2rem .2rem rgba(0, 0, 0, .3);
   display: block;
   margin: 1rem auto;
@@ -64,6 +64,15 @@
 .playlist-builder {
   margin: 1rem auto;
   display: block;
+}
+
+.tape-image-card {
+  margin: 1rem;
+  max-width: 260px;
+}
+
+.card {
+  display: inline-block;
 }
 
 footer {
