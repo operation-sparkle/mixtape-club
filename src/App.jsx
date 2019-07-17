@@ -9,6 +9,7 @@ import Navigation from './components/Navbar.jsx';
 import Search from './components/Search.jsx';
 import Hero from './components/Hero.jsx';
 import SearchList from './components/SearchList.jsx';
+import PlaylistBuilderList from './components/PlaylistBuilderList.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class App extends React.Component {
                 <Search />
                 <LoginBox />
                 <SearchList searchResults={searchResults} />
+                <PlaylistBuilderList />
             <footer className="text-info bg-light">Created by Team Operation Sparkle.</footer>
             </div>
         );

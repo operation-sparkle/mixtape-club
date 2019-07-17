@@ -22,8 +22,8 @@
 
 #title {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 3rem;
+  margin-top: 1rem;
+  font-size: 2rem;
   font-weight: bold;
   color: white;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, .6);
@@ -31,7 +31,7 @@
 
 #subtitle {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: white;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, .6);
@@ -59,6 +59,11 @@
 
 .search-item:hover {
   background-color: #a7dae7;
+}
+
+.playlist-builder {
+  margin: 1rem auto;
+  display: block;
 }
 
 footer {
