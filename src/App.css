@@ -76,6 +76,11 @@
   display: inline-block;
 }
 
+.tape-cover-image {
+  margin: 4rem auto;
+  display: block;
+}
+
 footer {
   height: 40px;
   padding: 1rem 2rem 2rem;

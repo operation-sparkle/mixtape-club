@@ -1,8 +1,14 @@
 import React from 'react';
 
+import TapeCoverImage from './TapeCoverImage.jsx';
+import PlayerSongList from './PlayerSongList.jsx';
+
 const MixtapePlayer = () => {
     return (
-        <div>Mixtape Player Component</div>
+        <div>
+            <TapeCoverImage />
+            <PlayerSongList />
+        </div>
     )
 }
 
