@@ -9,7 +9,7 @@ const PlaylistImageSelector = () => {
             <div className="card tape-image-card">
                 <img className="card-img-top" src={LisaFrankenstein} alt="Card image cap"/>
                     <div className="card-body">
-                        <p className="card-text">Select Lisa frankenstein Tape.</p>
+                        <p className="card-text">Select Lisa Frankenstein Tape.</p>
                     </div>
             </div>
             <div className="card tape-image-card">
