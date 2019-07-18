@@ -8,7 +8,7 @@ import MixtapePlayer from "./MixtapePlayer.jsx";
 
 function Container(props) {
     const { location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange } = props;
-    console.log(props);
+   
    
     return (
             <section className="route-section">

@@ -8,7 +8,7 @@ import SearchPlayer from './SearchPlayer.jsx';
 
 const CreateMixtapes = (props) => {
     const { searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange } = props;
-    console.log(props);
+   
   
     return (
         <div style={{marginTop: '4rem'}}>

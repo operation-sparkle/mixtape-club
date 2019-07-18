@@ -5,9 +5,11 @@ import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
 
 const SearchPlayer = (props) => {
-    const {onReady, onPlayVideo, onPauseVideo, playing, searchResults, selectedResult } = props;
+    const {onReady, onPlayVideo, onPauseVideo, playing, selectedResult } = props;
 
-   
+    let title = selectedResult.snippet.title.replace(/&amp;/g, '&');
+    title = title.replace(/&#39;/g, '\'');
+
     const iconStyle = {
         fontSize: '2.5rem',
         marginTop: '15%',
@@ -39,7 +41,7 @@ const SearchPlayer = (props) => {
             </div>
             <div className="col-9">
              <h3 style={titleStyle}>
-             {selectedResult.snippet.title}
+             {title}
              </h3> 
                 </div>
             </div>
