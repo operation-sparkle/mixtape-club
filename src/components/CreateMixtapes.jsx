@@ -4,15 +4,18 @@ import PlaylistImageSelector from './PlaylistImageSelector.jsx';
 import Search from './Search.jsx';
 import SearchList from './SearchList.jsx';
 import PlaylistBuilderList from './PlaylistBuilderList.jsx';
+import SearchPlayer from './SearchPlayer.jsx';
 
 const CreateMixtapes = (props) => {
-    const { searchResults, onSearch, onChange, onPlayVideo, onReady } = props;
-    console.log(props);
+    const { searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, playing, selectedResult } = props;
+    // console.log(props);
+  
     return (
         <div style={{marginTop: '4rem'}}>
             <PlaylistImageSelector />
             <Search onSearch={onSearch} onChange={onChange} />
-            <SearchList searchResults={searchResults} onPlayVideo={onPlayVideo} onReady={onReady}/>
+            <SearchPlayer onPlayVideo={onPlayVideo} onReady={onReady} onPauseVideo={onPauseVideo} playing={playing} searchResults={searchResults} selectedResult={selectedResult}/>
+            <SearchList searchResults={searchResults} />
             <PlaylistBuilderList />
             <div>Create Mixtapes Component</div>
         </div>
