@@ -30,11 +30,13 @@ class App extends React.Component {
             query: '',
             player: null,
             tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
+            builderImage: { image: BlueTape, name: 'blue' },
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onPlayVideo = this.onPlayVideo.bind(this);
         this.onReady = this.onReady.bind(this);
+        this.onSelectTapeImage = this.onSelectTapeImage.bind(this);
 
     }
 
@@ -70,13 +72,20 @@ class App extends React.Component {
             console.error('Error searching:', err)
         })
     }
+
+    onSelectTapeImage(tape) {
+        this.setState({
+            builderImage: tape,
+        })
+    }
+
     render() {
-        const { searchResults, tapeImages } = this.state;
+        const { searchResults, tapeImages, builderImage } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} tapeImages={tapeImages} />
+                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage}/>
                 </div>
             </Router>
         );
