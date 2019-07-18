@@ -43,6 +43,16 @@ passport.use(new GoogleStrategy({
     }
 ))
 
+
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../dist/index.html'), function (err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
+})
+
 app.post('/francoTest' , (req, res) => {
         const playListDetails = {
             userId: 'franco3445',
