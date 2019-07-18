@@ -45,7 +45,7 @@ class App extends React.Component {
         this.onTapeLabelChange = this.onTapeLabelChange.bind(this);
         this.onResultClick = this.onResultClick.bind(this);
     }
-    
+
     onChange(event){
         this.setState({
             query: event.target.value,

@@ -44,7 +44,9 @@ passport.use(new GoogleStrategy({
 ))
 
 
-
+// when refreshing on different endpoints, our page would crash.
+// https://tylermcginnis.com/react-router-cannot-get-url-refresh/
+// Read article above for explanation 
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '../dist/index.html'), function (err) {
         if (err) {
@@ -53,13 +55,36 @@ app.get('/*', function (req, res) {
     })
 })
 
-app.post('/francoTest' , (req, res) => {
-    const filter = {userId: 'franco3445'};
-    const update = {tapeDeck: 'green'};
+app.post('/update' , (req, res) => {
+    // need to figure out how we are sending info to endpoint
+    const filter = { userId: 'CHANGE THE FILTER SOMEHOW FILL_ME_IN'};
+    const update = { tapeDeck: 'FILL_ME_IN'};
     db.updatePlaylist(filter, update, (response) => {
         console.log(response);
         res.end('Playlist Updated');
     });
+});
+
+app.post('/store' , (req, res) => {
+    // need to figure out how we are sending info to endpoint
+    const playlistDetails = {
+        userId: 'FILL_ME_IN',
+        aSideLinks: 'FILL_ME_IN',
+        bSideLinks: 'FILL_ME_IN',
+        aTitles: 'FILL_ME_IN',
+        bTitles: 'FILL_ME_IN',
+        tapeDeck: 'FILL_ME_IN',
+        tapeLabel: 'FILL_ME_IN',
+    }
+    db.storePlaylist(playlistDetails, (response) => {
+        console.log(response);
+        res.end('Playlist Stored')
+    });
+});
+
+app.post('/mixtape-player', (req, res) => {
+    console.log('yesr')
+    res.end('You have hit the end point')
 });
 
 
@@ -77,11 +102,9 @@ app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
        res.redirect('http://localhost:3000/');
-       
     });
 
 app.get('/', (req, res) => {
-   
     console.log(req);
     res.render('/');
 });
@@ -99,7 +122,7 @@ app.post('/search', (req, res) => {
             type: 'video',
         }
     }
-       axios.get(url, options)
+    axios.get(url, options)
         .then((response)=> {
             res.send(response.data);
             
