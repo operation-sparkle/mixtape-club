@@ -7,8 +7,8 @@ import CreateMixtapes from "./CreateMixtapes.jsx";
 import MixtapePlayer from "./MixtapePlayer.jsx";
 
 function Container(props) {
-    const { location, searchResults, onChange, onSearch, onPlayVideo, onReady } = props;
-    console.log(props);
+    const { location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult } = props;
+   
     return (
             <section className="route-section">
                 <Switch location={location}>
@@ -17,7 +17,9 @@ function Container(props) {
                     
                     <Route
                         path='/create-mixtapes'
-                    render={(props) => <CreateMixtapes {...props} searchResults={searchResults} onReady={onReady} onSearch={onSearch} onChange={onChange} onPlayVideo={onPlayVideo}/>}
+                    render={(props) => <CreateMixtapes {...props} searchResults={searchResults} onReady={onReady}
+                     onSearch={onSearch} onChange={onChange} onPauseVideo={onPauseVideo} onPlayVideo={onPlayVideo} 
+                     onResultClick={onResultClick} playing={playing} selectedResult={selectedResult}/>}
                     />
                     <Route path="/mixtape-player" component={MixtapePlayer} />
                 </Switch>
