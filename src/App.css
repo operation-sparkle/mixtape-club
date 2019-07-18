@@ -63,8 +63,12 @@
 }
 
 .playlist-builder {
-  margin: 1rem auto;
+  margin: 2rem auto 0;
   display: block;
+}
+
+.builder-tracks {
+  font-size: .8rem;
 }
 
 .tape-image-card {
@@ -80,6 +84,20 @@
   margin: 4rem auto;
   display: block;
 }
+
+.nav-pills > a {
+    color: #17a2b8 !important;
+}
+
+.nav-pills > a.active {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+}
+
+.list-group-item .track-li {
+  padding: 0.1rem .5rem !important;
+}
+
 
 footer {
   height: 40px;
