@@ -7,7 +7,7 @@ import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 const SearchPlayer = (props) => {
     const {onReady, onPlayVideo, onPauseVideo, playing, searchResults, selectedResult } = props;
 
-   
+    console.log('hello?')
     const iconStyle = {
         fontSize: '2.5rem',
         marginTop: '15%',
