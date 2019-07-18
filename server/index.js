@@ -54,22 +54,12 @@ app.get('/*', function (req, res) {
 })
 
 app.post('/francoTest' , (req, res) => {
-        const playListDetails = {
-            userId: 'franco3445',
-            aSideLinks: '[https://www.youtube.com/watch?v=gWju37TZfo0, https://www.youtube.com/watch?v=WLNzTZVvoWs]',
-            bSideLinks: '[https://www.youtube.com/watch?v=lDK9QqIzhwk]',
-            aTitles: '[Intl Players Anthem, Roses]',
-            bTitles: '[Living on a Prayer]',
-            tapeDeck: 'blue',
-            tapeLabel: 'Hey there!'
-        }
-        db.storePlaylist(playListDetails, (response) => {
-            console.log(response);
-            res.end('meow');
-        });
-        // db.findCreate({googleId:'peter'}, (err, user) => {
-        //     res.json(user);
-        // })
+    const filter = {userId: 'franco3445'};
+    const update = {tapeDeck: 'green'};
+    db.updatePlaylist(filter, update, (response) => {
+        console.log(response);
+        res.end('Playlist Updated');
+    });
 });
 
 
