@@ -75,6 +75,7 @@ const storePlaylist = function(plDetails, callback){
 const updatePlaylist = async function(filter, update, callback){
     // see how params should be passed in
     // new:true allows the data to be the document AFTER the update is made
+    // should be dynamic for whatever info is passed
     // const filter = { userId: 'franco3445' };
     // const update = { tapeDeck: 'green' };
     const data = await Playlist.findOneAndUpdate(filter, update, {new: true});
