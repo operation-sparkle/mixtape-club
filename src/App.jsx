@@ -15,6 +15,13 @@ import PlaylistBuilderList from './components/PlaylistBuilderList.jsx';
 import PlaylistImageSelector from './components/PlaylistImageSelector.jsx';
 import { cpus } from "os";
 
+import LisaFrankenstein from './assets/img/tapes/lisa-frankenstein-tape.gif';
+import GreenTape from './assets/img/tapes/green-tape.gif';
+import OrangeTape from './assets/img/tapes/orange-tape.gif';
+import BlueTape from './assets/img/tapes/blue-tape.gif';
+import RedTape from './assets/img/tapes/red-tape.gif';
+import PinkTape from './assets/img/tapes/pink-tape.gif';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +29,9 @@ class App extends React.Component {
         this.state = {
             searchResults: [{ snippet: { title: '' }, id: { videoId: '4D2qcbu26gs' }}],
             player: null,
+            tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
+            builderImage: { image: BlueTape, name: 'blue' },
+            tapeLabel: 'Your label here',
             playing: false,
             query: '',
             selectedResult: { snippet: { title: 'Search for a song' }, id: { videoId: '4D2qcbu26gs' } },
@@ -31,6 +41,8 @@ class App extends React.Component {
         this.onPlayVideo = this.onPlayVideo.bind(this);
         this.onPauseVideo = this.onPauseVideo.bind(this);
         this.onReady = this.onReady.bind(this);
+        this.onSelectTapeImage = this.onSelectTapeImage.bind(this);
+        this.onTapeLabelChange = this.onTapeLabelChange.bind(this);
         this.onResultClick = this.onResultClick.bind(this);
     }
     
@@ -78,6 +90,18 @@ class App extends React.Component {
         })
     }
 
+    onSelectTapeImage(tape) {
+        this.setState({
+            builderImage: tape,
+        })
+    }
+
+    onTapeLabelChange(event) {
+        this.setState({
+            tapeLabel: event.target.value,
+        })
+    }
+
     onResultClick(selected) {
         this.setState({
             playing: true,
@@ -88,14 +112,12 @@ class App extends React.Component {
         },0);
     }
     render() {
-        const { searchResults, playing, selectedResult } = this.state;
+        const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} 
-                    onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} 
-                    onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} selectedResult={selectedResult}/>
+                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult}/>
                 </div>
             </Router>
         );
