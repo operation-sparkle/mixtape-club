@@ -21,9 +21,13 @@ class App extends React.Component {
         this.state = {
             searchResults: [{ snippet: { title: 'Music is cool' }, id: { videoId: '4D2qcbu26gs' }}],
             query: '',
+            player: null,
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onPlayVideo = this.onPlayVideo.bind(this);
+        this.onReady = this.onReady.bind(this);
+
     }
 
     onChange(event){
@@ -32,13 +36,24 @@ class App extends React.Component {
         })
     }
 
+    onPlayVideo() {
+        console.log('play');
+        this.state.player.playVideo();
+    }
+
+    onReady(event) {
+        console.log(`YouTube Player has been saved to state.`); // eslint-disable-line
+        this.setState({
+            player: event.target,
+        });
+    }
+
     onSearch(){
         console.log(this.state.query);
         let query = this.state.query;
         axios.post('/search', {query})
         .then((response)=>{
             console.log(response);
-            // debugger;
             this.setState({
                 searchResults : response.data.items,
             })
@@ -53,7 +68,7 @@ class App extends React.Component {
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} />
+                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} />
                 </div>
             </Router>
         );
