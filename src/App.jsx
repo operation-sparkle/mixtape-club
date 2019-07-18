@@ -31,7 +31,7 @@ class App extends React.Component {
         this.onPlayVideo = this.onPlayVideo.bind(this);
         this.onPauseVideo = this.onPauseVideo.bind(this);
         this.onReady = this.onReady.bind(this);
-
+        this.onResultClick = this.onResultClick.bind(this);
     }
     
     onChange(event){
@@ -62,6 +62,7 @@ class App extends React.Component {
         });
     }
 
+    
     onSearch(){
         let query = this.state.query;
         axios.post('/search', {query})
@@ -76,6 +77,16 @@ class App extends React.Component {
             console.error('Error searching:', err)
         })
     }
+
+    onResultClick(selected) {
+        this.setState({
+            playing: true,
+            selectedResult: selected,
+        })
+        setTimeout(()=>{
+            this.state.player.playVideo();
+        },0);
+    }
     render() {
         const { searchResults, playing, selectedResult } = this.state;
         return (
@@ -84,7 +95,7 @@ class App extends React.Component {
                     <Navigation />
                     <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} 
                     onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} 
-                    playing={playing} searchResults={searchResults} selectedResult={selectedResult}/>
+                    onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} selectedResult={selectedResult}/>
                 </div>
             </Router>
         );

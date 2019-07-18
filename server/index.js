@@ -101,8 +101,7 @@ app.post('/search', (req, res) => {
     }
        axios.get(url, options)
         .then((response)=> {
-            data = response.data;
-            res.send(data);
+            res.send(response.data);
             
         })
         .catch((err)=> {
