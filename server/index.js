@@ -4,6 +4,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
+const db = require('../database/index.js')
 require('dotenv').config();
 
 const app = express();
@@ -32,15 +33,35 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true,
 },
     function (req, token, tokenSecret, profile, done) {
-        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        //     return done(err, user);
-        // });
+        db.findCreate({ googleId: profile.id }, (err, user) => {
+            return done(err, user);
+        });
         console.log(profile);
        process.nextTick(function(){
            return done(null, profile);
        })
     }
 ))
+
+app.post('/francoTest' , (req, res) => {
+        const playListDetails = {
+            userId: 'franco3445',
+            aSideLinks: '[https://www.youtube.com/watch?v=gWju37TZfo0, https://www.youtube.com/watch?v=WLNzTZVvoWs]',
+            bSideLinks: '[https://www.youtube.com/watch?v=lDK9QqIzhwk]',
+            aTitles: '[Intl Players Anthem, Roses]',
+            bTitles: '[Living on a Prayer]',
+            tapeDeck: 'blue',
+            tapeLabel: 'Hey there!'
+        }
+        db.storePlaylist(playListDetails, (response) => {
+            console.log(response);
+            res.end('meow');
+        });
+        // db.findCreate({googleId:'peter'}, (err, user) => {
+        //     res.json(user);
+        // })
+});
+
 
 
 // This will call google's authentication
