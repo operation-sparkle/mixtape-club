@@ -3,14 +3,14 @@ import React from 'react';
 import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
 const PlaylistBuilderList = (props) => {
-    const { builderImage } = props;
+    const { builderImage, tapeLabel } = props;
     return (
         <div className="border border-info playlist-builder shadow-sm p-3 mb-5 bg-white rounded">
         <div className="row">
                 <div className="col-md-4" style={{ marginTop: ".5rem" }}>
                     <h5 style={{ textAlign: "center" }}>Playlist Builder:</h5>
                     <img className="col-md-12" src={builderImage.image}/>
-                    <p style={{ margin: ".5rem 1rem" }}><b>Label:</b>User Label Goes Here</p>
+                    <p style={{ margin: ".5rem 1rem" }}><b>Label:</b>{tapeLabel}</p>
                  </div>
                 <div className="col-2" style={{marginTop: "1rem"}}>
                     <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">

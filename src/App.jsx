@@ -31,12 +31,14 @@ class App extends React.Component {
             player: null,
             tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
             builderImage: { image: BlueTape, name: 'blue' },
+            tapeLabel: 'Your label here',
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onPlayVideo = this.onPlayVideo.bind(this);
         this.onReady = this.onReady.bind(this);
         this.onSelectTapeImage = this.onSelectTapeImage.bind(this);
+        this.onTapeLabelChange = this.onTapeLabelChange.bind(this);
 
     }
 
@@ -79,13 +81,19 @@ class App extends React.Component {
         })
     }
 
+    onTapeLabelChange(event) {
+        this.setState({
+            tapeLabel: event.target.value,
+        })
+    }
+
     render() {
-        const { searchResults, tapeImages, builderImage } = this.state;
+        const { searchResults, tapeImages, builderImage, tapeLabel } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage}/>
+                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} />
                 </div>
             </Router>
         );

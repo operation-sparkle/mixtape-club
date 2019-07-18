@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import Hero from './Hero.jsx';
+import Footer from './Footer.jsx';
 
 const LoginBox = () => {
     return (
@@ -16,6 +17,7 @@ const LoginBox = () => {
                     <a href="/auth/google" className="btn btn-info">Sign In with Google</a>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 };
