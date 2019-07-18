@@ -6,11 +6,11 @@ import SearchList from './SearchList.jsx';
 import PlaylistBuilderList from './PlaylistBuilderList.jsx';
 
 const CreateMixtapes = (props) => {
-    const { searchResults, onSearch, onChange, onPlayVideo, onReady } = props;
+    const { searchResults, onSearch, onChange, onPlayVideo, onReady, tapeImages } = props;
     console.log(props);
     return (
         <div style={{marginTop: '4rem'}}>
-            <PlaylistImageSelector />
+            <PlaylistImageSelector tapeImages={tapeImages}/>
             <Search onSearch={onSearch} onChange={onChange} />
             <SearchList searchResults={searchResults} onPlayVideo={onPlayVideo} onReady={onReady}/>
             <PlaylistBuilderList />

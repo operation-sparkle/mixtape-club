@@ -72,8 +72,8 @@
 }
 
 .tape-image-card {
-  margin: 1rem;
-  max-width: 260px;
+  margin: .5rem;
+  max-width: 46%;
 }
 
 .card {
@@ -116,6 +116,11 @@ footer {
 
   #title {
     font-size: 5rem;
-  }
+}
+
+  .tape-image-card {
+  margin: .5rem;
+  max-width: 30%;
+}
 
 }

@@ -14,6 +14,13 @@ import SearchList from './components/SearchList.jsx';
 import PlaylistBuilderList from './components/PlaylistBuilderList.jsx';
 import PlaylistImageSelector from './components/PlaylistImageSelector.jsx';
 
+import LisaFrankenstein from './assets/img/tapes/lisa-frankenstein-tape.gif';
+import GreenTape from './assets/img/tapes/green-tape.gif';
+import OrangeTape from './assets/img/tapes/orange-tape.gif';
+import BlueTape from './assets/img/tapes/blue-tape.gif';
+import RedTape from './assets/img/tapes/red-tape.gif';
+import PinkTape from './assets/img/tapes/pink-tape.gif';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +29,7 @@ class App extends React.Component {
             searchResults: [{ snippet: { title: 'Music is cool' }, id: { videoId: '4D2qcbu26gs' }}],
             query: '',
             player: null,
+            tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -63,12 +71,12 @@ class App extends React.Component {
         })
     }
     render() {
-        const { searchResults } = this.state;
+        const { searchResults, tapeImages } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} />
+                    <Container onReady={this.onReady} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} searchResults={searchResults} tapeImages={tapeImages} />
                 </div>
             </Router>
         );
