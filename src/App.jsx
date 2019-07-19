@@ -29,7 +29,6 @@ class App extends React.Component {
         this.state = {
             searchResults: [{ snippet: { title: '' }, id: { videoId: '4D2qcbu26gs' }}],
             player: null,
-    
             tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
             builderImage: { image: BlueTape, name: 'blue' },
             tapeLabel: 'Untitled',
@@ -39,7 +38,8 @@ class App extends React.Component {
             sideA: [],
             sideB: [],
             displayImageSelector: true,
-            googleId: 'FILL_ME_IN'
+            googleId: 'FILL_ME_IN',
+            isAuthenticated: false,
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -54,6 +54,28 @@ class App extends React.Component {
         this.onPassSongToSideB = this.onPassSongToSideB.bind(this);
         this.onSaveTapeImage = this.onSaveTapeImage.bind(this);
         this.onSavePlaylist = this.onSavePlaylist.bind(this);
+        this.authenticateUser = this.authenticateUser.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+
+    authenticateUser(){
+        axios.get('/user/')
+        .then((response)=> {
+            console.log(response);
+            if(response.data.verified){
+                this.setState({
+                    isAuthenticated: true,
+                })
+            }
+        })
+        .catch((err)=>{
+            console.error(err);
+        })
+    }
+
+    componentDidMount(){
+        this.authenticateUser();
+        console.log(this.state.isAuthenticated);
     }
 
     onChange(event){
@@ -83,7 +105,14 @@ class App extends React.Component {
         });
     }
 
-   
+    logout (){
+        console.log('logged out');
+        axios.get('/logout');
+        this.setState({
+            isAuthenticated: true,
+        })
+    }
+  
 
     
     onSearch(){
@@ -177,12 +206,12 @@ class App extends React.Component {
 
 
     render() {
-        const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA, sideB, displayImageSelector } = this.state;
+        const { isAuthenticated, searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA, sideB, displayImageSelector } = this.state;
         return (
             <Router>
                 <div className="App">
-                    <Navigation />
-                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage} onSavePlaylist={this.onSavePlaylist}/>
+                    <Navigation logout={this.logout} isAuthenticated={isAuthenticated} />
+                    <Container authenticateUser={this.authenticateUser} isAuthenticated={isAuthenticated} onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage} onSavePlaylist={this.onSavePlaylist}/>
                 </div>
             </Router>
         );

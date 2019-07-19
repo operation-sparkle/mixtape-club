@@ -7,8 +7,8 @@ import PlaylistBuilderList from './PlaylistBuilderList.jsx';
 import SearchPlayer from './SearchPlayer.jsx';
 
 const CreateMixtapes = (props) => {
-    const { searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onSavePlaylist } = props;
-   
+    const { authenticateUser, searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onSavePlaylist } = props;
+    
   
     return (
         <div style={{marginTop: '4rem'}}>

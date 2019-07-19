@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props) => {
+    const {logout, isAuthenticated} = props;
+
+  
+
     return (
         <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-info">
             <a className="navbar-brand" href="#">Mixtape Club</a>
@@ -21,7 +25,7 @@ const Navigation = () => {
                         <Link to="/mixtape-player" className="nav-link">Mixtape Player</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/login" className="nav-link">Login</Link>
+                        {isAuthenticated ? <Link className="nav-link" onClick={logout}>Logout</Link> : <Link to="/login"  className="nav-link">Login</Link>}
                     </li>
                 </ul>
   </div>
