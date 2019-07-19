@@ -75,6 +75,7 @@ const storePlaylist = function(plDetails, callback){
 
 
 const retrievePlaylist =  function(filter, callback){
+    
     Playlist.findOne(filter, (err, data) => {
         if(err){
             callback(err);
