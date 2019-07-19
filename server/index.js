@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 const db = require('../database/index.js')
+const ObjectId = require('mongodb').ObjectID;
 require('dotenv').config();
 
 const app = express();
@@ -82,9 +83,12 @@ app.post('/store' , (req, res) => {
     });
 });
 
-app.post('/mixtape-player', (req, res) => {
+app.post('/mixtape-player/', (req, res) => {
     //need to do this dynamically
-    const filter = {userId: 'rachel'}
+    const {id} = req.body
+    let hold = id.slice(10)
+    let actualId = hold.slice(0, hold.length - 2)
+    const filter = {_id : ObjectId(actualId)}
     db.retrievePlaylist(filter, (response) => {
         if(response === null){
             res.end('No Results Found');
@@ -95,7 +99,7 @@ app.post('/mixtape-player', (req, res) => {
             if(bSideLinks){
                 bSide = JSON.parse(bSideLinks);
             }
-            console.log(aSide, bSide,tapeDeck, tapeLabel, userId)
+            console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
             // use aSide, bSide, tapeDeck, tapeLabel, userId
             res.end('yeasss')
         }

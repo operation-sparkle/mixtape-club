@@ -5,6 +5,7 @@ import TapeCoverImage from './TapeCoverImage.jsx';
 import PlayerSongList from './PlayerSongList.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 
 class MixtapePlayer extends React.Component {
 constructor(props){
@@ -15,6 +16,7 @@ constructor(props){
         aSideLinks: ['4D2qcbu26gs', "r52KqG4G678", "Rht7rBHuXW8"],
         bSideLinks: ["8ahU-x-4Gxw", "H1Zm6E6Sy4Y", "fpsOOrwF558"],
         interval: null,
+        playListId: null || this.props.location
     }
     this.onReady = this.onReady.bind(this);
     this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -34,6 +36,27 @@ constructor(props){
         marginTop: '15%',
     }
 }
+
+    componentWillMount(){
+        if(this.state.playListId){
+            const {search} = this.state.playListId;
+            let id = search.slice(4).replace(/%22/g, '"');
+            axios.post('mixtape-player', {
+                id,
+            })
+                .then(function (response) {
+                    // handle success
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+        }
+    }
+
+
+
     onReady(event) {
         this.setState({
             player: event.target,
@@ -84,7 +107,7 @@ constructor(props){
         this.state.player.setVolume(100);
     }
     render (){
-        const { onDeckSideA, onDeckSideB } = this.props;
+        const { onDeckSideA, onDeckSideB, location } = this.props;
         return(
         <div>
             <TapeCoverImage />

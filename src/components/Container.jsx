@@ -20,6 +20,9 @@ function Container(props) {
                     <Route path='/mixtape-player'
                     render={(props) => <MixtapePlayer {...props} onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} />} />
 
+                    <Route path='/mixtape-player/:id' component={MixtapePlayer}
+                    render={(props) => <MixtapePlayer {...props} onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} />} />
+
                     <Route path='/login'
                     render={(props) => <Login {...props} />} />
 
