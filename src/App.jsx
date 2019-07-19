@@ -57,6 +57,7 @@ class App extends React.Component {
         this.onPassSongToSideB = this.onPassSongToSideB.bind(this);
         this.onSaveTapeImage = this.onSaveTapeImage.bind(this);
         this.onSavePlaylist = this.onSavePlaylist.bind(this);
+        this.onDeleteSong = this.onDeleteSong.bind(this);
     }
 
     onChange(event){
@@ -184,6 +185,28 @@ class App extends React.Component {
             })
     }
 
+    onDeleteSong(event) {
+        const index = event.currentTarget.id[1];
+        const side = event.currentTarget.id[0];
+        console.log('index:', index, 'side:', side);
+        console.log('Id of clicked is:', event.currentTarget.id);
+        //console.log('Side of clicked is:', event.currentTarget.side);
+        if (side === 'A') {
+            this.state.sideA.splice(index, 1);
+            const newSideA = this.state.sideA;
+            this.setState({
+                sideA: newSideA,
+            })
+        } else if (side === 'B') {
+            this.state.sideB.splice(index, 1);
+            const newSideB = this.state.sideB;
+            this.setState({
+                sideB: newSideB,
+            })
+        }
+
+    }
+
 
     render() {
         const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA, sideB, displayImageSelector, onDeckSideA, onDeckSideB, tapeBackgroundColor } = this.state;
@@ -191,7 +214,7 @@ class App extends React.Component {
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage} onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} onSavePlaylist={this.onSavePlaylist} tapeBackgroundColor={tapeBackgroundColor} />
+                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage} onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} onSavePlaylist={this.onSavePlaylist} tapeBackgroundColor={tapeBackgroundColor} onDelete={this.onDeleteSong} />
                 </div>
             </Router>
         );
