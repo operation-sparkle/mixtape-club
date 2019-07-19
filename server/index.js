@@ -67,17 +67,17 @@ app.post('/update' , (req, res) => {
 
 app.post('/store' , (req, res) => {
     // need to figure out how we are sending info to endpoint
+    const {userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel} = req.body
     const playlistDetails = {
-        userId: 'FILL_ME_IN',
-        aSideLinks: 'FILL_ME_IN',
-        bSideLinks: 'FILL_ME_IN',
-        aTitles: 'FILL_ME_IN',
-        bTitles: 'FILL_ME_IN',
-        tapeDeck: 'FILL_ME_IN',
-        tapeLabel: 'FILL_ME_IN',
-    }
-    db.storePlaylist(playlistDetails, (response) => {
-        console.log(response);
+            userId,
+            aSideLinks: aSideLinks.toString(),
+            bSideLinks: bSideLinks.toString(),
+            tapeDeck,
+            tapeLabel,
+        }
+        console.log(playlistDetails);
+        db.storePlaylist(playlistDetails, (response) => {
+        // console.log(response);
         res.end('Playlist Stored')
     });
 });

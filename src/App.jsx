@@ -39,6 +39,7 @@ class App extends React.Component {
             sideA: [],
             sideB: [],
             displayImageSelector: true,
+            googleId: 'FILL_ME_IN'
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -52,6 +53,7 @@ class App extends React.Component {
         this.onPassSongToSideA = this.onPassSongToSideA.bind(this);
         this.onPassSongToSideB = this.onPassSongToSideB.bind(this);
         this.onSaveTapeImage = this.onSaveTapeImage.bind(this);
+        this.onSavePlaylist = this.onSavePlaylist.bind(this);
     }
 
     onChange(event){
@@ -151,13 +153,36 @@ class App extends React.Component {
         })
     }
 
+    onSavePlaylist() {
+        const {googleId, sideA, sideB, builderImage} = this.state;
+        const {image, name} = builderImage
+        axios.post('/store', {
+            
+                userId: googleId,
+                aSideLinks: sideA,
+                bSideLinks: sideB,
+                tapeDeck: image,
+                tapeLabel: name
+            
+        })
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }
+
+
     render() {
         const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA, sideB, displayImageSelector } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage}/>
+                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage} onSavePlaylist={this.onSavePlaylist}/>
                 </div>
             </Router>
         );
