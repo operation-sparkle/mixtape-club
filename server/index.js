@@ -117,7 +117,7 @@ app.post('/search', (req, res) => {
         params: {
             key: process.env.YOUTUBE_API_KEY,
             q: queryString,
-            maxResults: 10,
+            maxResults: 8,
             videoEmbeddable: true,
             type: 'video',
         }

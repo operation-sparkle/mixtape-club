@@ -32,10 +32,13 @@ class App extends React.Component {
     
             tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
             builderImage: { image: BlueTape, name: 'blue' },
-            tapeLabel: 'Your label here',
+            tapeLabel: 'Untitled',
             playing: false,
             query: '',
             selectedResult: { snippet: { title: 'Search for a song' }, id: { videoId: '4D2qcbu26gs' } },
+            sideA: [],
+            sideB: [],
+            displayImageSelector: true,
         }
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -46,6 +49,9 @@ class App extends React.Component {
         this.onSelectTapeImage = this.onSelectTapeImage.bind(this);
         this.onTapeLabelChange = this.onTapeLabelChange.bind(this);
         this.onResultClick = this.onResultClick.bind(this);
+        this.onPassSongToSideA = this.onPassSongToSideA.bind(this);
+        this.onPassSongToSideB = this.onPassSongToSideB.bind(this);
+        this.onSaveTapeImage = this.onSaveTapeImage.bind(this);
     }
 
     onChange(event){
@@ -106,6 +112,7 @@ class App extends React.Component {
     }
 
     onResultClick(selected) {
+        console.log('List item clicked');
         this.setState({
             playing: true,
             selectedResult: selected,
@@ -114,13 +121,43 @@ class App extends React.Component {
             this.state.player.playVideo();
         },0);
     }
+
+    onPassSongToSideA(song) {
+        const { sideA } = this.state;
+        if (sideA.length < 5) {
+            this.setState(prevState => {
+                return {sideA: prevState.sideA.concat(song)}
+            })
+        } else {
+            alert('Side A is full, try adding songs to side B or remove songs to make more space.');
+        }
+    }
+
+    onPassSongToSideB(song) {
+        const { sideB } = this.state;
+        if (sideB.length < 5) {
+            this.setState(prevState => {
+                return { sideB: prevState.sideB.concat(song) }
+            })
+        } else {
+            alert('Side B is full, try adding songs to side A or remove songs to make more space.');
+        }
+    }
+
+    onSaveTapeImage() {
+        const { displayImageSelector } = this.state;
+        this.setState({
+            displayImageSelector: !displayImageSelector,
+        })
+    }
+
     render() {
-        const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel } = this.state;
+        const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA, sideB, displayImageSelector } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult}/>
+                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={this.onSaveTapeImage}/>
                 </div>
             </Router>
         );
