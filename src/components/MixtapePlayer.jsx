@@ -19,7 +19,8 @@ constructor(props){
         interval: null,
         playListId: null || this.props.location,
         aSideTitles: ['placeholder'],
-        bSideTitles: ['placeholder']
+        bSideTitles: ['placeholder'],
+        tapeCover: ""
     }
     this.onReady = this.onReady.bind(this);
     this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -66,19 +67,21 @@ constructor(props){
                             aSideLinks: aVideoArray,
                             bSideLinks: bVideoArray,
                             aSideTitles: aTitleArray,
-                            bSideTitles: bTitleArray
+                            bSideTitles: bTitleArray,
+                            tapeCover: tapeDeck
                         })
                     } else {
-                        const { aSide,tapeDeck, tapeLabel, userId } = response.data;
+                        const { aSide, tapeDeck, tapeLabel, userId } = response.data;
                         aSide.forEach(video => {
                             aVideoArray.push(video.id.videoId);
                             aTitleArray.push(video.snippet.title);
                         })
                         this.setState({
                             aSideLinks: aVideoArray,
-                            aSideTitles: aTitleArray
+                            aSideTitles: aTitleArray,
+                            tapeCover: tapeDeck
                         })
-                    }
+                    }   
                 })
                 .catch((error) => {
                     // handle error
@@ -140,10 +143,10 @@ constructor(props){
     }
     render (){
         const { onDeckSideA, onDeckSideB } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles} = this.state
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
         return(
         <div>
-            <TapeCoverImage />
+            <TapeCoverImage tapeCover={tapeCover}/>
             <YouTube videoId={aSideLinks[0]} onReady={this.onReady} />
                 <div className="row col-9 bg-info d-flex align-items-center" style={this.divStyle}>
                     <div className="col-2" >

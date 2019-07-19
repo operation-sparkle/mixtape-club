@@ -119,11 +119,11 @@ app.post('/mixtape-player/', (req, res) => {
                 }
             }
 
-            console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
+            // console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
 
             // use aSide, bSide, tapeDeck, tapeLabel, userId
             res.end('yeasss')
-        }
+        });
         
     });
 

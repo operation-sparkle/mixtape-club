@@ -29,7 +29,6 @@ class App extends React.Component {
         this.state = {
             searchResults: [{ snippet: { title: '' }, id: { videoId: '4D2qcbu26gs' }}],
             player: null,
-    
             tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
             builderImage: { image: BlueTape, name: 'blue' },
             tapeLabel: 'Untitled',
@@ -164,14 +163,14 @@ class App extends React.Component {
     }
 
     onSavePlaylist() {
-        const {googleId, sideA, sideB, builderImage} = this.state;
+        const {googleId, sideA, sideB, builderImage, tapeLabel} = this.state;
         const {image, name} = builderImage
         axios.post('/store', {
                 userId: googleId,
                 aSideLinks: sideA,
                 bSideLinks: sideB,
                 tapeDeck: image,
-                tapeLabel: name
+                tapeLabel
         })
             .then(function (response) {
                 // handle success
