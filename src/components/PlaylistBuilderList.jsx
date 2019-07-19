@@ -5,7 +5,7 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 // import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
 const PlaylistBuilderList = (props) => {
-    const { builderImage, tapeLabel, sideA , sideB, onSaveImage } = props;
+    const { builderImage, tapeLabel, sideA , sideB, onSaveImage, onSavePlaylist } = props;
     console.log(sideA);
     return (
         <div className="border border-info playlist-builder shadow-sm p-3 mb-5 bg-white rounded">
@@ -14,7 +14,7 @@ const PlaylistBuilderList = (props) => {
                     <h5 style={{ textAlign: "center" }}>{tapeLabel} Mixtape:</h5>
                     <img className="col-md-12" src={builderImage.image} style={{ margin: ".4rem 0" }}/>
                     <button className="btn btn-outline-info col-6 col-md-12 mx-auto" type="submit" style={{ margin: ".4rem 0" }} onClick={onSaveImage}>Edit Cassette</button>
-                    <button className="btn btn-info col-6 col-md-12 mx-auto" type="submit">Save Mixtape</button>
+                    <button className="btn btn-info col-6 col-md-12 mx-auto" type="submit" onClick={onSavePlaylist}>Save Mixtape</button>
                  </div>
                 <div className="col-sm-4 col-md-2" style={{marginTop: "1rem"}}>
                     <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
