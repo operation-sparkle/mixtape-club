@@ -48,7 +48,7 @@ constructor(props){
             playing: true,
         })
     }
-
+    
     onPauseVideo(){
         console.log('pause');
         this.state.player.pauseVideo();
@@ -84,6 +84,7 @@ constructor(props){
         this.state.player.setVolume(100);
     }
     render (){
+        const { onDeckSideA, onDeckSideB } = this.props;
         return(
         <div>
             <TapeCoverImage />
@@ -96,7 +97,7 @@ constructor(props){
                             <FontAwesomeIcon style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
                     </div>
         </div>
-            <PlayerSongList />
+                <PlayerSongList onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} />
         </div>
         )
     };
