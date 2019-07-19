@@ -129,7 +129,7 @@ class App extends React.Component {
 
     onPassSongToSideB(song) {
         const { sideB } = this.state;
-        if (sideA.length < 5) {
+        if (sideB.length < 5) {
             this.setState(prevState => {
                 return { sideB: prevState.sideB.concat(song) }
             })
@@ -139,12 +139,12 @@ class App extends React.Component {
     }
 
     render() {
-        const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA } = this.state;
+        const { searchResults, playing, selectedResult, tapeImages, builderImage, tapeLabel, sideA, sideB } = this.state;
         return (
             <Router>
                 <div className="App">
                     <Navigation />
-                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} />
+                    <Container onReady={this.onReady} onPauseVideo={this.onPauseVideo} onPlayVideo={this.onPlayVideo} onChange={this.onChange} onSearch={this.onSearch} onResultClick={this.onResultClick} playing={playing} searchResults={searchResults} tapeImages={tapeImages} builderImage={builderImage} selectImage={this.onSelectTapeImage} tapeLabel={tapeLabel} onLabelChange={this.onTapeLabelChange} selectedResult={selectedResult} onPassToSideA={this.onPassSongToSideA} sideA={sideA} onPassToSideB={this.onPassSongToSideB} sideB={sideB} />
                 </div>
             </Router>
         );

@@ -3,7 +3,7 @@ import React from 'react';
 import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
 const PlaylistBuilderList = (props) => {
-    const { builderImage, tapeLabel, sideA } = props;
+    const { builderImage, tapeLabel, sideA , sideB } = props;
     console.log(sideA);
     return (
         <div className="border border-info playlist-builder shadow-sm p-3 mb-5 bg-white rounded">
@@ -32,11 +32,11 @@ const PlaylistBuilderList = (props) => {
                         </div>
                         <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <ul className="list-group list-group-flush builder-tracks">
-                                <li className="list-group-item track-li">Track 1 B</li>
-                                <li className="list-group-item track-li">Track 2 B</li>
-                                <li className="list-group-item track-li">Track 3 B</li>
-                                <li className="list-group-item track-li">Track 4 B</li>
-                                <li className="list-group-item track-li">Track 5 B</li>
+                                <li className="list-group-item track-li">{sideB[0] ? sideB[0].snippet.title : 'Track 5 A'}</li>
+                                <li className="list-group-item track-li">{sideB[1] ? sideB[1].snippet.title : 'Track 5 A'}</li>
+                                <li className="list-group-item track-li">{sideB[2] ? sideB[2].snippet.title : 'Track 5 A'}</li>
+                                <li className="list-group-item track-li">{sideB[3] ? sideB[3].snippet.title : 'Track 5 A'}</li>
+                                <li className="list-group-item track-li">{sideB[4] ? sideB[4].snippet.title : 'Track 5 A'}</li>
                             </ul>
                         </div>
                     </div>
