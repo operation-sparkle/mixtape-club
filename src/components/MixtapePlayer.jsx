@@ -48,8 +48,9 @@ constructor(props){
         let bTitleArray = [];
         if(this.state.playListId){
             const {search} = this.state.playListId;
-            let id = search.slice(4).replace(/%22/g, '"');
-            axios.post('mixtape-player', {
+            // debugger;
+            let id = search.slice(4);
+            axios.post('/mixtape-player', {
                 id,
             })
                 .then((response) => {
