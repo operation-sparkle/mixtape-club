@@ -69,7 +69,7 @@ app.post('/store' , (req, res) => {
     // need to figure out how we are sending info to endpoint
     const {userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel} = req.body
     const playlistDetails = {
-            userId: 'rachel',
+            userId: 'FILLMEIN',
             aSideLinks: JSON.stringify(aSideLinks),
             bSideLinks: JSON.stringify(bSideLinks),
             tapeDeck,
@@ -77,7 +77,7 @@ app.post('/store' , (req, res) => {
         }
         console.log(playlistDetails);
         db.storePlaylist(playlistDetails, (response) => {
-        // console.log(response);
+        console.log(response)
         res.end('Playlist Stored')
     });
 });
