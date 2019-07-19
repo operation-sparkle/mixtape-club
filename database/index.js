@@ -72,6 +72,19 @@ const storePlaylist = function(plDetails, callback){
     });
 };
 
+
+
+const retrievePlaylist =  function(filter, callback){
+    
+    Playlist.findOne(filter, (err, data) => {
+        if(err){
+            callback(err);
+        } else {
+            callback(data);
+        }
+    });
+}
+
 const updatePlaylist = async function(filter, update, callback){
     // see how params should be passed in
     // new:true allows the data to be the document AFTER the update is made
@@ -89,3 +102,4 @@ module.exports.Playlist = Playlist;
 module.exports.User = User;
 module.exports.storePlaylist = storePlaylist;
 module.exports.updatePlaylist = updatePlaylist;
+module.exports.retrievePlaylist = retrievePlaylist;
