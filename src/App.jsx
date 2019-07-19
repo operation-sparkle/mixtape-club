@@ -188,9 +188,7 @@ class App extends React.Component {
     onDeleteSong(event) {
         const index = event.currentTarget.id[1];
         const side = event.currentTarget.id[0];
-        console.log('index:', index, 'side:', side);
-        console.log('Id of clicked is:', event.currentTarget.id);
-        //console.log('Side of clicked is:', event.currentTarget.side);
+        
         if (side === 'A') {
             this.state.sideA.splice(index, 1);
             const newSideA = this.state.sideA;
