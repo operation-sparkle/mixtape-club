@@ -6,7 +6,7 @@ const TapeImageCard = (props) => {
         <div className="card tape-image-card" onClick={() => selectImage(tapeImage)}>
             <img className="card-img-top" src={tapeImage.image} alt="Card image cap" />
             <div className="card-body">
-                <p className="card-text">Select {tapeImage.name} tape.</p>
+                <p className="card-text">Select tape.</p>
             </div>
         </div>
     )

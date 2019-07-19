@@ -5,7 +5,7 @@ import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
 
 const SearchPlayer = (props) => {
-    const {onReady, onPlayVideo, onPauseVideo, playing, selectedResult } = props;
+    const { onReady, onPlayVideo, onPauseVideo, playing, selectedResult, onPassToSideA, onPassToSideB } = props;
 
     let title = selectedResult.snippet.title.replace(/&amp;/g, '&');
     title = title.replace(/&#39;/g, '\'');
@@ -39,10 +39,12 @@ const SearchPlayer = (props) => {
             <FontAwesomeIcon style={iconStyle} icon={faPlay} onClick={onPlayVideo}/> }
             
             </div>
-            <div className="col-9">
-             <h3 style={titleStyle}>
-             {title}
-             </h3> 
+            <div className="col-8">
+                <h3 style={titleStyle}>{title}</h3> 
+            </div>
+                <div>
+                    <button className="btn btn-light" onClick={()=> onPassToSideA(selectedResult)}>Add to Side A</button>
+                    <button className="btn btn-light" onClick={() => onPassToSideB(selectedResult)}>Add to Side B</button>
                 </div>
             </div>
         </div>
