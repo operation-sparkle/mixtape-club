@@ -159,13 +159,11 @@ class App extends React.Component {
         const {googleId, sideA, sideB, builderImage} = this.state;
         const {image, name} = builderImage
         axios.post('/store', {
-            
                 userId: googleId,
                 aSideLinks: sideA,
                 bSideLinks: sideB,
                 tapeDeck: image,
                 tapeLabel: name
-            
         })
             .then(function (response) {
                 // handle success

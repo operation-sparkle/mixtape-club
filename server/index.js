@@ -69,25 +69,37 @@ app.post('/store' , (req, res) => {
     // need to figure out how we are sending info to endpoint
     const {userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel} = req.body
     const playlistDetails = {
-            userId,
-            aSideLinks: aSideLinks.toString(),
-            bSideLinks: bSideLinks.toString(),
+            userId: 'FILLMEIN',
+            aSideLinks: JSON.stringify(aSideLinks),
+            bSideLinks: JSON.stringify(bSideLinks),
             tapeDeck,
             tapeLabel,
         }
         console.log(playlistDetails);
         db.storePlaylist(playlistDetails, (response) => {
-        // console.log(response);
+        console.log(response)
         res.end('Playlist Stored')
     });
 });
 
 app.post('/mixtape-player', (req, res) => {
     //need to do this dynamically
-    const filter = {'FIL_ME_IN': 'FIL_ME_IN'}
+    const filter = {userId: 'rachel'}
     db.retrievePlaylist(filter, (response) => {
-        console.log(response);  
-        res.end('word', response)
+        if(response === null){
+            res.end('No Results Found');
+        } else {
+            const {aSideLinks, bSideLinks, tapeDeck, tapeLabel, userId} = response
+            let aSide = JSON.parse(aSideLinks);
+            let bSide;
+            if(bSideLinks){
+                bSide = JSON.parse(bSideLinks);
+            }
+            console.log(aSide, bSide,tapeDeck, tapeLabel, userId)
+            // use aSide, bSide, tapeDeck, tapeLabel, userId
+            res.end('yeasss')
+        }
+        
     });
 });
 
