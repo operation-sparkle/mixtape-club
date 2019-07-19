@@ -4,12 +4,13 @@ import TapeImageCard from './TapeImageCard.jsx';
 import TapeLabel from './TapeLabel.jsx';
 
 const PlaylistImageSelector = (props) => {
-    const { tapeImages, selectImage, onLabelChange, onSaveImage } = props;
+    const { tapeImages, selectImage, onLabelChange, onSaveImage, tapeBackgroundColor } = props;
+    console.log(tapeBackgroundColor);
     return (
         <div className="mx-auto" style={{maxWidth: "800px"}}>
         <h5>Choose your tape:</h5>
             <div className="row">
-                {tapeImages.map((tapeImage, i) => <TapeImageCard tapeImage={tapeImage} key={i} selectImage={selectImage}/>)}
+                {tapeImages.map((tapeImage, i) => <TapeImageCard tapeImage={tapeImage} key={i} selectImage={selectImage} tapeBackgroundColor={tapeBackgroundColor} />)}
             </div>
             <TapeLabel onLabelChange={onLabelChange}  />
             <div className="row">
