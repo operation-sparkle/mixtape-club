@@ -29,6 +29,7 @@ class App extends React.Component {
         this.state = {
             searchResults: [{ snippet: { title: '' }, id: { videoId: '4D2qcbu26gs' }}],
             player: null,
+    
             tapeImages: [{ image: LisaFrankenstein, name: 'Lisa Frankenstein' }, { image: GreenTape, name: 'green' }, { image: OrangeTape, name: 'orange' }, { image: BlueTape, name: 'blue' }, { image: RedTape, name: 'red' }, { image: PinkTape, name: 'pink' }],
             builderImage: { image: BlueTape, name: 'blue' },
             tapeLabel: 'Untitled',
@@ -47,6 +48,7 @@ class App extends React.Component {
         this.onPlayVideo = this.onPlayVideo.bind(this);
         this.onPauseVideo = this.onPauseVideo.bind(this);
         this.onReady = this.onReady.bind(this);
+    
         this.onSelectTapeImage = this.onSelectTapeImage.bind(this);
         this.onTapeLabelChange = this.onTapeLabelChange.bind(this);
         this.onResultClick = this.onResultClick.bind(this);
@@ -78,11 +80,12 @@ class App extends React.Component {
     }
 
     onReady(event) {
-        console.log(`YouTube Player has been saved to state.`); // eslint-disable-line
         this.setState({
             player: event.target,
         });
     }
+
+   
 
     
     onSearch(){
