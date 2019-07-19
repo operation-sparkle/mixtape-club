@@ -98,14 +98,26 @@ app.post('/mixtape-player/', (req, res) => {
             let bSide;
             if(bSideLinks){
                 bSide = JSON.parse(bSideLinks);
+                const data = {
+                    aSide,
+                    bSide,
+                    tapeDeck,
+                    tapeLabel,
+                    userId
+                }
+                res.send(data);
+                } else {
+                    const data = {
+                        aSide,
+                        tapeDeck,
+                        tapeLabel,
+                        userId
+                    }
+                    res.send(data);
+                }
             }
-            console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
-            // use aSide, bSide, tapeDeck, tapeLabel, userId
-            res.end('yeasss')
-        }
-        
+        });
     });
-});
 
 
 
