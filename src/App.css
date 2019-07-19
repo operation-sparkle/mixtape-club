@@ -50,16 +50,15 @@
 
 .search {
   display: block;
-  margin: .5rem auto;
-  max-width: 560px;
+  margin: 1.5rem auto 0.1rem;
   background-color: #17a2b8;
 }
 
 .search-list {
   display: block;
-  margin: .5rem auto 0.5rem;
+  margin: .2rem auto 0.5rem;
   padding-right: 0rem !important;
-  z-index: -10;
+  
 }
 
 .search-item {
@@ -144,22 +143,6 @@ footer {
   .tape-image-card {
   margin: .5rem;
   max-width: 31%;
-}
-
-.search {
-  display: block;
-  margin: .3rem 0.5rem 0.5rem 20%;
-  max-width: 560px;
-  background-color: none;
-  height: 47px;
-  padding: 0 !important;
-}
-
-.search-list {
-  display: block;
-  margin: -3.48rem auto 0.5rem;
-  padding-right: 0rem !important;
-  z-index: -10;
 }
 
 }

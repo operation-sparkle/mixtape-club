@@ -4,7 +4,7 @@ import TapeImageCard from './TapeImageCard.jsx';
 import TapeLabel from './TapeLabel.jsx';
 
 const PlaylistImageSelector = (props) => {
-    const { tapeImages, selectImage, onLabelChange } = props;
+    const { tapeImages, selectImage, onLabelChange, onSaveImage } = props;
     return (
         <div className="mx-auto" style={{maxWidth: "800px"}}>
         <h5>Choose your tape:</h5>
@@ -13,7 +13,7 @@ const PlaylistImageSelector = (props) => {
             </div>
             <TapeLabel onLabelChange={onLabelChange}  />
             <div className="row">
-                <button className="btn btn-info col-4 col-md-2 mx-auto" type="submit">Save Tape</button>
+                <button className="btn btn-info col-4 col-md-2 mx-auto" type="submit" onClick={onSaveImage}>Save Tape</button>
             </div>
         </div>
     )
