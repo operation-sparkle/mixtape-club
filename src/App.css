@@ -73,11 +73,16 @@
 
 .tape-image-card {
   margin: .5rem;
-  max-width: 46%;
+  max-width: 45%;
 }
 
 .card {
   display: inline-block;
+}
+
+.card-body {
+  padding: 8px !important;
+  text-align: center;
 }
 
 .tape-cover-image {
