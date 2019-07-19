@@ -83,8 +83,12 @@ app.post('/store' , (req, res) => {
 });
 
 app.post('/mixtape-player', (req, res) => {
-    console.log('yesr')
-    res.end('You have hit the end point')
+    //need to do this dynamically
+    const filter = {'FIL_ME_IN': 'FIL_ME_IN'}
+    db.retrievePlaylist(filter, (response) => {
+        console.log(response);  
+        res.end('word', response)
+    });
 });
 
 
