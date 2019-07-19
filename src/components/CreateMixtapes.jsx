@@ -17,7 +17,7 @@ const CreateMixtapes = (props) => {
             <Search onSearch={onSearch} onChange={onChange} />
             <SearchPlayer onPlayVideo={onPlayVideo} onReady={onReady} onPauseVideo={onPauseVideo} playing={playing} searchResults={searchResults} selectedResult={selectedResult} onPassToSideA={onPassToSideA} onPassToSideB={onPassToSideB} />
             <SearchList searchResults={searchResults} onResultClick={onResultClick}/>
-            <PlaylistBuilderList builderImage={builderImage} tapeLabel={tapeLabel} sideA={sideA} sideB={sideB} />
+            <PlaylistBuilderList builderImage={builderImage} tapeLabel={tapeLabel} sideA={sideA} sideB={sideB} onSaveImage={onSaveImage}/>
         </div>}
         </div>
     )
