@@ -7,7 +7,7 @@ import CreateMixtapes from "./CreateMixtapes.jsx";
 import MixtapePlayer from "./MixtapePlayer.jsx";
 
 function Container(props) {
-    const { location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage } = props;
+    const { location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onDeckSideA, onDeckSideB } = props;
    
    
     return (
@@ -19,7 +19,7 @@ function Container(props) {
                     render={(props) => <CreateMixtapes {...props} searchResults={searchResults} onReady={onReady} onSearch={onSearch} onChange={onChange} onPauseVideo={onPauseVideo} onPlayVideo={onPlayVideo} onResultClick={onResultClick} playing={playing} selectedResult={selectedResult} tapeImages={tapeImages} builderImage={builderImage} selectImage={selectImage} tapeLabel={tapeLabel} onLabelChange={onLabelChange} onPassToSideA={onPassToSideA} sideA={sideA} onPassToSideB={onPassToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={onSaveImage} />} />
 
                     <Route path='/mixtape-player'
-                    render={(props) => <MixtapePlayer {...props} />} />
+                    render={(props) => <MixtapePlayer {...props} onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} />} />
 
                     <Route path='/login'
                     render={(props) => <Login {...props} />} />

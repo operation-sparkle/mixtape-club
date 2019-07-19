@@ -3,12 +3,13 @@ import React from 'react';
 import TapeCoverImage from './TapeCoverImage.jsx';
 import PlayerSongList from './PlayerSongList.jsx';
 
-const MixtapePlayer = () => {
+const MixtapePlayer = (props) => {
+    const { onDeckSideA, onDeckSideB } = props;
     
     return (
         <div>
             <TapeCoverImage />
-            <PlayerSongList />
+            <PlayerSongList onDeckSideA={onDeckSideA} onDeckSideB={onDeckSideB} />
         </div>
     )
 }
