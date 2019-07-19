@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session')
 const path = require('path');
 const axios = require('axios');
 const bodyParser = require('body-parser');
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -32,28 +34,53 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:3000/auth/google/callback',
     passReqToCallback: true,
 },
-    function (req, token, tokenSecret, profile, done) {
-        db.findCreate({ googleId: profile.id }, (err, user) => {
-            return done(err, user);
-        });
-        console.log(profile);
-       process.nextTick(function(){
-           return done(null, profile);
-       })
-    }
+function (req, token, tokenSecret, profile, done) {
+    db.findCreate({ googleId: profile.id }, (err, user) => {
+        return done(err, user);
+    });
+    console.log(profile);
+    process.nextTick(function(){
+        return done(null, profile);
+    })
+}
 ))
 
+// This will call google's authentication
+app.get('/auth/google',
+    passport.authenticate('google', {
+        scope:
+            ['email', 'profile']
+    }
+    ));
+
+// Redirect on success or failure
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }),
+    function (req, res) {
+        res.redirect('http://localhost:3000/');      
+    });
 
 // when refreshing on different endpoints, our page would crash.
 // https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 // Read article above for explanation 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../dist/index.html'), function (err) {
-        if (err) {
-            res.status(500).send(err)
+  
+    if(req.path !== '/auth/google/callback'){
+      debugger;
+        if (req.path === "/create-mixtapes" || req.path === "/my-mixtapes") {
+            if(!req.user){
+                res.redirect('http://localhost:3000/login')
+            }
+        }  else{
+            res.sendFile(path.join(__dirname, '../dist/index.html'));    
+            req.logout();
         }
-    })
+    } 
 })
+
+app.get('/login', function (req, res) {
+    res.sendFile(path.join(__dirname, '../dist/index.html')); 
+});
 
 app.post('/update' , (req, res) => {
     // need to figure out how we are sending info to endpoint
@@ -89,20 +116,6 @@ app.post('/mixtape-player', (req, res) => {
 
 
 
-// This will call google's authentication
-app.get('/auth/google',
-    passport.authenticate('google', {
-        scope:
-            ['email', 'profile']
-    }
-    ));
-
-// Redirect on success or failure
-app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function (req, res) {
-       res.redirect('http://localhost:3000/');
-    });
 
 app.get('/', (req, res) => {
     console.log(req);
