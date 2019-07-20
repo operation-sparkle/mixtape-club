@@ -12,7 +12,7 @@ const CreateMixtapes = (props) => {
   
     return (
         <div style={{marginTop: '4rem'}}>
-            {displayImageSelector ? <PlaylistImageSelector tapeImages={tapeImages} selectImage={selectImage} tapeLabel={tapeLabel} onLabelChange={onLabelChange} onSaveImage={onSaveImage} tapeBackgroundColor={tapeBackgroundColor} /> :
+            {displayImageSelector ? <PlaylistImageSelector tapeImages={tapeImages} selectImage={selectImage} tapeLabel={tapeLabel} onLabelChange={onLabelChange} onSaveImage={onSaveImage} builderImage={builderImage} tapeBackgroundColor={tapeBackgroundColor} /> :
         <div className="mx-auto" style={{maxWidth: '860px'}}>
             <Search onSearch={onSearch} onChange={onChange} />
             <SearchPlayer onPlayVideo={onPlayVideo} onReady={onReady} onPauseVideo={onPauseVideo} playing={playing} searchResults={searchResults} selectedResult={selectedResult} onPassToSideA={onPassToSideA} onPassToSideB={onPassToSideB} />
