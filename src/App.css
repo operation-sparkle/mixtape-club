@@ -103,6 +103,10 @@
   text-align: center;
 }
 
+.delete {
+  font-size: 1rem;
+}
+
 .tape-cover-image {
   margin: -160px auto 1rem;
   display: block;
@@ -142,12 +146,12 @@
 }
 
 .player-ui {
-  margin-top: -100px;
+  margin-top: -120px;
 }
 
 .ui-button {
   color: #333;
-  font-size: 0.5rem;
+  font-size: 0.4rem;
 }
 
 .ui-button:hover {
