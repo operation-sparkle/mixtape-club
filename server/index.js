@@ -37,7 +37,7 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true,
 },
 ((req, token, tokenSecret, profile, done) => {
-  db.findCreate({ googleId: profile.id }, (err, user) => done(err, user));
+  db.findCreate({ googleId: profile.id, displayName: profile.displayName }, (err, user) => done(err, user));
   console.log(profile);
   process.nextTick(() => done(null, profile));
 })));
@@ -86,8 +86,6 @@ app.get('/*', (req, res) => {
     }
   }
 });
-
-
 
 app.post('/update', (req, res) => {
   // need to figure out how we are sending info to endpoint
