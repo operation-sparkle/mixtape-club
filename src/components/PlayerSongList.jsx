@@ -37,6 +37,7 @@ const PlayerSongList = (props) => {
                         </div>
                     </div>
                 </div>
+                <button className="btn btn-info col-12 col-md-3 flip-button">Flip Tape</button>
             </div>
         </div>
     )
