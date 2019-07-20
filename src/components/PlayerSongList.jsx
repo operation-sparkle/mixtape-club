@@ -7,7 +7,7 @@ const PlayerSongList = (props) => {
     console.log(aSideTitles);
     return (
 
-        <div className="border border-info playlist-builder-player shadow-sm p-3 mb-5 bg-white rounded">
+        <div className="border border-info playlist-builder-player mx-auto shadow-sm p-3 mb-5 bg-white rounded">
             <div className="row">
                 <div className="col-sm-4 col-md-2" style={{ marginTop: "1rem" }}>
                     <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">

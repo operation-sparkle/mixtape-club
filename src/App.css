@@ -110,7 +110,7 @@
 .tape-cover-image {
   margin: -168px auto 1rem;
   display: block;
-  max-width: 300px;
+  max-width: 170px !important;
   z-index: -10;
   position: relative;
 }
@@ -192,6 +192,10 @@ footer {
   max-width: 340px !important;
   position: absolute;
 }
+
+.player-ui {
+  max-width: 240px !important;
+}
 }
 
 /***** Small devices (landscape phones, 576px and up) *****/
@@ -199,7 +203,7 @@ footer {
   .tape-cover-image {
   margin: -266px auto 1rem;
   display: block;
-  max-width: 500px;
+  max-width: 320px !important;
   z-index: -10;
   position: relative;
 }
@@ -262,13 +266,14 @@ footer {
 .tape-cover-image {
   margin: -430px auto 1rem;
   display: block;
-  max-width: 500px;
+  max-width: 370px !important;
   z-index: -10;
 }
 
 .tape-deck-image {
   margin-bottom: 100px;
   margin-top: -190px;
+  max-width: 740px !important;
 }
 
 .player-ui {
@@ -280,6 +285,16 @@ footer {
 
 .ui-button {
   font-size: 2rem;
+}
+
+.playlist-builder-player {
+  max-width: 740px !important;
+}
+
+.my-mixtape-list {
+  margin-top: -2rem;
+  padding: 0rem !important;
+  max-width: 740px !important;
 }
 
 }
