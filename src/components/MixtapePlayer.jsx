@@ -218,7 +218,9 @@ componentWillMount() {
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
+
         const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong} = this.state
+
         return(
         <div>
             <h4 className="player-tape-label">{tapeTitle}</h4>

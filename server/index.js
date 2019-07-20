@@ -84,6 +84,7 @@ app.get('/userPlaylists', (req, res) => {
     res.send(response);
   });
 });
+
 app.get('/', (req, res) => {
   res.redirect('http://localhost:3000/mixtape-player');
 });
@@ -179,33 +180,9 @@ app.post('/mixtape-player/', (req, res) => {
         res.send(data);
       }
     }
-
-    // console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
-
-    // use aSide, bSide, tapeDeck, tapeLabel, userId
-    // res.end('yeasss');
   });
 });
 
-
-// This will call google's authentication
-app.get('/auth/google',
-  passport.authenticate('google', {
-    scope:
-            ['email', 'profile'],
-  }));
-
-// Redirect on success or failure
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    res.redirect('http://localhost:3000/');
-  });
-
-app.get('/', (req, res) => {
-  console.log(req);
-  res.render('/');
-});
 
 app.post('/search', (req, res) => {
   const queryString = req.body.query;
