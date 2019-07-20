@@ -15,54 +15,62 @@ import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
 
 class MixtapePlayer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            player: null,
-            playing: false,
-            aSideLinks: ['4D2qcbu26gs', "r52KqG4G678", "Rht7rBHuXW8"],
-            bSideLinks: ["8ahU-x-4Gxw", "H1Zm6E6Sy4Y", "fpsOOrwF558"],
-            interval: null,
-            playListId: null || this.props.location,
-            aSideTitles: ['placeholder'],
-            bSideTitles: ['placeholder'],
-            tapeCover: LisaFrankenstein,
-            userPlaylists: [],
-            googleId: null || this.props.googleId
-
-        }
-        this.onReady = this.onReady.bind(this);
-        this.onPlayVideo = this.onPlayVideo.bind(this);
-        this.onPauseVideo = this.onPauseVideo.bind(this);
-        this.onForward = this.onForward.bind(this);
-        this.onStopForward = this.onStopForward.bind(this);
-        this.onBackward = this.onBackward.bind(this);
-        this.onStopBackward = this.onStopBackward.bind(this);
-
-        this.divStyle = {
-            borderRadius: '5px',
-            marginTop: '-360px'
-        }
-
-        this.iconStyle = {
-            margin: '3% 0',
-        }
+constructor(props){
+    super(props);
+    this.state = {
+        player: null,
+        playing: false,
+        aSideLinks: ["r52KqG4G678", "Rht7rBHuXW8"],
+        bSideLinks: ["H1Zm6E6Sy4Y", "fpsOOrwF558"],
+        interval: null,
+        playListId: null || this.props.location,
+        aSideTitles: ['placeholder'],
+        bSideTitles: ['placeholder'],
+        tapeCover: LisaFrankenstein,
+        sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
+        googleId: null || this.props.googleId,
+        userPlaylists: [],
     }
+    
+    this.getUserPlaylists()
+    this.onReady = this.onReady.bind(this);
+    this.onPlayVideo = this.onPlayVideo.bind(this);
+    this.onPauseVideo = this.onPauseVideo.bind(this);
+    this.onForward = this.onForward.bind(this);
+    this.onStopForward = this.onStopForward.bind(this);
+    this.onBackward = this.onBackward.bind(this);
+    this.onStopBackward = this.onStopBackward.bind(this);
+    this.onFlip = this.onFlip.bind(this);
 
-    componentWillMount() {
-        this.loadShared()
-        if(this.state.googleId !== null){
-            this.getUserPlaylists()
-        }
+    
+    this.divStyle = {
+        borderRadius: '5px',
+        marginTop: '-360px'
     }
+    this.iconStyle = {
+        margin: '3% 0',
+    }
+}
+
+componentWillMount() {
+    this.loadShared()
+    if(this.state.googleId !== null){
+        this.getUserPlaylists();
+    }
+}
+
 
     getUserPlaylists(){
         const {googleId} = this.state
+        console.log(googleId, 'what')
         axios.get('/userPlaylists', {
             googleId
         })
         .then((response) => {
-            console.log(response);
+            const {data} = response;
+            this.setState({
+                userPlaylists: data,
+            })
         })
         .catch((err) => {
             console.error('Error searching:', err)
@@ -97,7 +105,8 @@ class MixtapePlayer extends React.Component {
                             bSideLinks: bVideoArray,
                             aSideTitles: aTitleArray,
                             bSideTitles: bTitleArray,
-                            tapeCover: tapeDeck
+                            tapeCover: tapeDeck,
+                            sidePlaying: aVideoArray
                         })
                     } else {
                         const { aSide, tapeDeck, tapeLabel, userId } = response.data;
@@ -108,7 +117,8 @@ class MixtapePlayer extends React.Component {
                         this.setState({
                             aSideLinks: aVideoArray,
                             aSideTitles: aTitleArray,
-                            tapeCover: tapeDeck
+                            tapeCover: tapeDeck,
+                            sidePlaying: aVideoArray
                         })
                     }
                 })
@@ -123,7 +133,7 @@ class MixtapePlayer extends React.Component {
         this.setState({
             player: event.target,
         });
-        this.state.player.loadPlaylist({ playlist: this.state.bSideLinks });
+        this.state.player.loadPlaylist({playlist: this.state.sidePlaying});
     }
 
     onPlayVideo() {
@@ -169,15 +179,33 @@ class MixtapePlayer extends React.Component {
         this.state.player.playVideo();
         this.state.player.setVolume(100);
     }
-    render() {
 
-        const { onDeckSideA, onDeckSideB, googleId } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover } = this.state
-        return (
-            <div>
-                <h4 className="player-tape-label">Mixtape Title</h4>
-                <TapeCoverImage tapeCover={tapeCover} />
-                <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
+    onFlip(){
+        if(this.state.sidePlaying[0] === this.state.aSideLinks[0]){
+            let sideB = this.state.bSideLinks;
+            this.setState({
+                sidePlaying: sideB,
+            })       
+            this.state.player.loadPlaylist({playlist: sideB});
+        } else if(this.state.sidePlaying[0] === this.state.bSideLinks[0]){
+            let sideA = this.state.aSideLinks;
+            this.setState({
+                sidePlaying: sideA,
+            })
+            this.state.player.loadPlaylist({ playlist: sideA });
+        } 
+    }
+
+
+    render (){
+
+        const { onDeckSideA, onDeckSideB } = this.props;
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists} = this.state
+        return(
+        <div>
+            <h4 className="player-tape-label">Mixtape Title</h4>
+            <TapeCoverImage tapeCover={tapeCover} />
+            <YouTube className="YouTube-vid" onReady={this.onReady} />
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
@@ -186,8 +214,8 @@ class MixtapePlayer extends React.Component {
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
-                <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList />
+                <PlayerSongList onFlip={this.onFlip} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+                <UserMixtapesList  userPlaylists={userPlaylists} />
             </div>
         )
     };

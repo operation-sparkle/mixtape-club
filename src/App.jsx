@@ -81,8 +81,8 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        const {googleId} = this.state;
         this.authenticateUser();
+        const {googleId} = this.state;
         
         axios.get('/getUser', {
             googleId
@@ -93,9 +93,8 @@ class App extends React.Component {
         .catch((err) => {
           console.error('Error searching:', err)
         })
-
-
     }
+
 
     onChange(event){
         this.setState({

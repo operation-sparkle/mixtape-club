@@ -7,23 +7,19 @@
 
 .hero {
   background: 
-    /* top, transparent red, faked with gradient */ 
     linear-gradient(
       rgba(255, 0, 0, 0.45), 
       rgba(111, 0, 255, 0.45)
     ),
-    /* bottom, image */
     url("./assets/img/cassette-tape.jpg");
   background-size: cover;
-  padding: 5.4rem 5.2rem 2rem 3rem;
-  width: 110vw;
-  height: 60vw;
-  margin: -1rem 0rem 1rem -1rem;
+  
+  margin: 0rem -1rem 1rem !important;
 }
 
 #title {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 2rem;
   font-weight: bold;
   color: white;
@@ -36,7 +32,7 @@
   font-weight: bold;
   color: white;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, .6);
-  max-width: 500px;
+  max-width: 440px !important;
   display: block;
   margin: 0rem auto;
 }
@@ -46,6 +42,7 @@
   display: block;
   margin: 1rem auto;
   text-align: center;
+  padding: 0 0 1rem !important;
 }
 
 .search {
@@ -184,6 +181,7 @@ footer {
   height: 40px;
   padding: 1rem 2rem 2rem;
   margin: 1rem -1rem 0rem;
+  text-align: center;
 }
 /***** x-small devices only *****/
 @media (max-width: 575.98px) { 
@@ -244,10 +242,14 @@ footer {
 /***** Medium devices (tablets, 768px and up) *****/
 @media (min-width: 768px) {
   .hero {
-  padding: 7.2rem 2rem 2rem 2rem;
-  width: 110vw;
-  height: 40vw;
-  margin: -3rem 0rem 1rem -1rem;
+    background: 
+    linear-gradient(
+      rgba(255, 0, 0, 0.45), 
+      rgba(111, 0, 255, 0.45)
+    ),
+    url("./assets/img/cassette-tape-lg.jpg");
+  background-size: cover;
+  margin: 0rem -1rem 2rem !important;
 }
 
   #title {

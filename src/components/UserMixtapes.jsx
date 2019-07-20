@@ -1,17 +1,16 @@
 import React from 'react';
-
-
+import { Link } from "react-router-dom";
 
 const UserMixtapesList = (props) => {
-    const { searchResults } = props;
+    const { searchResults, userPlaylists } = props;
     console.log(props);
     return (
         <ul className="list-group col-12 mx-auto my-mixtape-list">
-            <li className="list-group-item active bg-info">My Mixtapes:</li>
-            <li className="list-group-item">Mixtape 1</li>
-            <li className="list-group-item">Mixtape 2</li>
-            <li className="list-group-item">Mixtape 3</li>
-            <li className="list-group-item">Mixtape 4</li>
+            <li className="list-group-item active  border border-info bg-info">My Mixtapes:</li>
+            {userPlaylists.map(playlist => {
+                return (<li className="list-group-item" >
+                    <Link to={`/mixtape-player?id=${playlist._id}`} className="navbar-brand" >{playlist.tapeLabel}</Link>
+            </li>) })}
         </ul>
     )
 }

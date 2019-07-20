@@ -76,7 +76,10 @@ app.get('/getUser', (req, res) => {
 });
 
 app.get('/userPlaylists', (req, res) => {
-  db.getAllPlaylists(req.query, (info, response) => {
+  const { id } = req.user;
+  // console.log(id);
+  db.getAllPlaylists({ userId: id }, (info, response) => {
+    console.log('bbbbbbbbbbbbbbbbbbbbbbbb');
     console.log(response);
     res.send(response);
   });
@@ -110,7 +113,7 @@ app.post('/store', (req, res) => {
     userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel,
   } = req.body;
   const playlistDetails = {
-    userId: 'FILLMEIN',
+    userId,
     aSideLinks: JSON.stringify(aSideLinks),
     bSideLinks: JSON.stringify(bSideLinks),
     tapeDeck,
