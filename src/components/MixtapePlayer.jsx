@@ -8,6 +8,7 @@ import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-
 import axios from 'axios';
 import { basename } from 'path';
 
+
 class MixtapePlayer extends React.Component {
 constructor(props){
     super(props);
@@ -21,6 +22,7 @@ constructor(props){
         aSideTitles: ['placeholder'],
         bSideTitles: ['placeholder'],
         tapeCover: ""
+
     }
     this.onReady = this.onReady.bind(this);
     this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -108,6 +110,7 @@ constructor(props){
         })
     }
     
+
     onPauseVideo(){
         console.log('pause');
         this.state.player.pauseVideo();
@@ -143,6 +146,7 @@ constructor(props){
         this.state.player.setVolume(100);
     }
     render (){
+
         const { onDeckSideA, onDeckSideB } = this.props;
         const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
         return(
@@ -158,6 +162,7 @@ constructor(props){
                     </div>
         </div>
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+
         </div>
         )
     };
