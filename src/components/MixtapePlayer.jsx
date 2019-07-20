@@ -28,10 +28,17 @@ constructor(props){
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
         sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
+<<<<<<< HEAD
+        googleId: null || this.props.googleId,
+        userPlaylists: [],
+=======
         tapeTitle: 'Untitled',
         currentSong: "",
 
+>>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
     }
+    
+    this.getUserPlaylists()
     this.onReady = this.onReady.bind(this);
     this.onPlayVideo = this.onPlayVideo.bind(this);
     this.onPauseVideo = this.onPauseVideo.bind(this);
@@ -42,31 +49,56 @@ constructor(props){
     this.onFlip = this.onFlip.bind(this);
     this.checkVid = this.checkVid.bind(this);
 
+    
     this.divStyle = {
         borderRadius: '5px',
         marginTop: '-360px'
-        }
-
+    }
     this.iconStyle = {
         margin: '3% 0',
     }
 }
 
-    componentWillMount(){
+componentWillMount() {
+    this.loadShared()
+    if(this.state.googleId !== null){
+        this.getUserPlaylists();
+    }
+}
+
+
+    getUserPlaylists(){
+        const {googleId} = this.state
+        console.log(googleId, 'what')
+        axios.get('/userPlaylists', {
+            googleId
+        })
+        .then((response) => {
+            const {data} = response;
+            this.setState({
+                userPlaylists: data,
+            })
+        })
+        .catch((err) => {
+            console.error('Error searching:', err)
+        })
+    }
+
+    loadShared() {
         let aVideoArray = [];
         let bVideoArray = [];
         let aTitleArray = [];
         let bTitleArray = [];
-        if(this.state.playListId){
-            const {search} = this.state.playListId;
+        if (this.state.playListId) {
+            const { search } = this.state.playListId;
             // debugger;
             let id = search.slice(4);
             axios.post('/mixtape-player', {
                 id,
             })
                 .then((response) => {
-                    if(response.data.bSide){
-                        const {aSide, bSide, tapeDeck, tapeLabel, userId} = response.data;
+                    if (response.data.bSide) {
+                        const { aSide, bSide, tapeDeck, tapeLabel, userId } = response.data;
                         aSide.forEach(video => {
                             aVideoArray.push(video.id.videoId);
                             aTitleArray.push(video.snippet.title);
@@ -97,7 +129,7 @@ constructor(props){
                             sidePlaying: aVideoArray,
                             tapeTitle: tapeLabel
                         })
-                    }   
+                    }
                 })
                 .catch((error) => {
                     // handle error
@@ -106,8 +138,6 @@ constructor(props){
         }
     }
 
-
-
     onReady(event) {
         this.setState({
             player: event.target,
@@ -115,45 +145,50 @@ constructor(props){
         this.state.player.loadPlaylist({playlist: this.state.sidePlaying});
     }
 
-    onPlayVideo(){
+    onPlayVideo() {
         console.log('play');
         this.state.player.playVideo();
         this.setState({
             playing: true,
         })
     }
-    
 
+<<<<<<< HEAD
+
+    onPauseVideo() {
+        console.log('pause');
+=======
     onPauseVideo(){
         console.log(this.state.player.getVideoUrl());
+>>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
         this.state.player.pauseVideo();
         this.setState({
             playing: false,
         })
     }
 
-    onForward(){
-       
+    onForward() {
+
         this.state.player.setPlaybackRate(2);
         this.state.player.setVolume(50);
     }
 
-    onStopForward(){
+    onStopForward() {
         this.state.player.setPlaybackRate(1.0);
         this.state.player.setVolume(100);
     }
 
-    onBackward(){
+    onBackward() {
         console.log('reverse');
         let time = this.state.player.getCurrentTime();
         this.state.player.setVolume(50);
-        this.state.interval = setInterval(()=> {
+        this.state.interval = setInterval(() => {
             time -= 2;
             this.state.player.seekTo(time);
         }, 90)
     }
 
-    onStopBackward(){
+    onStopBackward() {
         clearInterval(this.state.interval);
         this.state.player.playVideo();
         this.state.player.setVolume(100);
@@ -187,10 +222,16 @@ constructor(props){
             this.state.player.loadPlaylist({ playlist: sideA });
         } 
     }
+
+
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
+<<<<<<< HEAD
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists} = this.state
+=======
         const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, tapeTitle, currentSong} = this.state
+>>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
         return(
         <div>
             <h4 className="player-tape-label">{tapeTitle}</h4>
@@ -198,15 +239,21 @@ constructor(props){
             <YouTube className="YouTube-vid" onReady={this.onReady} onStateChange={this.checkVid}/>
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >
-                    <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
-                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} />
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
+<<<<<<< HEAD
+                <PlayerSongList onFlip={this.onFlip} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+                <UserMixtapesList  userPlaylists={userPlaylists} />
+            </div>
+=======
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
                 <UserMixtapesList />
         </div>
+>>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
         )
     };
 }

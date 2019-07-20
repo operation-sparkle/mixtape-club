@@ -75,6 +75,14 @@ app.get('/getUser', (req, res) => {
   });
 });
 
+app.get('/userPlaylists', (req, res) => {
+  const { id } = req.user;
+  // console.log(id);
+  db.getAllPlaylists({ userId: id }, (info, response) => {
+    console.log('bbbbbbbbbbbbbbbbbbbbbbbb');
+    console.log(response);
+    res.send(response);
+  });
 app.get('/', (req, res) => {
   res.redirect('http://localhost:3000/mixtape-player');
 });
