@@ -218,7 +218,9 @@ componentWillMount() {
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, tapeTitle, currentSong} = this.state
+
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong} = this.state
+
         return(
         <div>
             <h4 className="player-tape-label">{tapeTitle}</h4>
@@ -233,9 +235,10 @@ componentWillMount() {
                     </div>
                 </div>
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList />
+                <UserMixtapesList userPlaylists={userPlaylists} />
         </div>
         )
     };
 }
+
 export default MixtapePlayer;
