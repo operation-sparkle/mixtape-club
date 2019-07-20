@@ -16,7 +16,7 @@ function Container(props) {
                     <Route exact path="/" component={Landing} />
                     
                     <Route path='/create-mixtapes'
-                    render={(props) => {isAuthenticated ? <CreateMixtapes {...props} authenticateUser={authenticateUser} searchResults={searchResults} onReady={onReady} onSearch={onSearch} onChange={onChange} onPauseVideo={onPauseVideo} onPlayVideo={onPlayVideo} onResultClick={onResultClick} playing={playing} selectedResult={selectedResult} tapeImages={tapeImages} builderImage={builderImage} selectImage={selectImage} tapeLabel={tapeLabel} onLabelChange={onLabelChange} onPassToSideA={onPassToSideA} sideA={sideA} onPassToSideB={onPassToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={onSaveImage} onSavePlaylist={onSavePlaylist} /> : <Login {...props} /> }} />
+                    render={(props) => isAuthenticated ? (<CreateMixtapes {...props} authenticateUser={authenticateUser} searchResults={searchResults} onReady={onReady} onSearch={onSearch} onChange={onChange} onPauseVideo={onPauseVideo} onPlayVideo={onPlayVideo} onResultClick={onResultClick} playing={playing} selectedResult={selectedResult} tapeImages={tapeImages} builderImage={builderImage} selectImage={selectImage} tapeLabel={tapeLabel} onLabelChange={onLabelChange} onPassToSideA={onPassToSideA} sideA={sideA} onPassToSideB={onPassToSideB} sideB={sideB} displayImageSelector={displayImageSelector} onSaveImage={onSaveImage} onSavePlaylist={onSavePlaylist} />) : (<Login {...props} />) } />
 
                     <Route path='/mixtape-player'
                     render={(props) => <MixtapePlayer {...props} />} />

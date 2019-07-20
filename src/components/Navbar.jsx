@@ -25,7 +25,7 @@ const Navigation = (props) => {
                         <Link to="/mixtape-player" className="nav-link">Mixtape Player</Link>
                     </li>
                     <li className="nav-item">
-                        {isAuthenticated ? <Link className="nav-link" onClick={logout}>Logout</Link> : <Link to="/login"  className="nav-link">Login</Link>}
+                        {isAuthenticated ? <Link className="nav-link" to="/login" onClick={logout}>Logout</Link> : <Link to="/login"  className="nav-link">Login</Link>}
                     </li>
                 </ul>
   </div>
