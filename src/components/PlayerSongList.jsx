@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const PlayerSongList = (props) => {
-    const { aSideTitles, bSideTitles, onFlip } = props;
+    const { aSideTitles, bSideTitles, currentSong, aSideLinks, bSideLinks, onFlip } = props;
     
     return (
 
@@ -19,20 +19,20 @@ const PlayerSongList = (props) => {
                     <div className="tab-content" id="v-pills-tabContent">
                         <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <ul className="list-group list-group-flush builder-tracks">
-                                <li className="list-group-item track-li">{aSideTitles[0]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[1]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[2]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[3]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[4]} </li>
+                                <li className="list-group-item track-li" id={aSideLinks[0]}>{aSideTitles[0]} </li>
+                                <li className="list-group-item track-li" id={aSideLinks[1]}>{aSideTitles[1]} </li>
+                                <li className="list-group-item track-li" id={aSideLinks[2]}>{aSideTitles[2]} </li>
+                                <li className="list-group-item track-li" id={aSideLinks[3]}>{aSideTitles[3]} </li>
+                                <li className="list-group-item track-li" id={aSideLinks[4]}>{aSideTitles[4]} </li>
                             </ul>
                         </div>
                         <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <ul className="list-group list-group-flush builder-tracks">
-                                <li className="list-group-item track-li">{bSideTitles[0]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[1]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[2]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[3]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[4]}</li>
+                                <li className="list-group-item track-li" id={bSideLinks[0]}>{bSideTitles[0]}</li>
+                                <li className="list-group-item track-li" id={bSideLinks[1]}>{bSideTitles[1]}</li>
+                                <li className="list-group-item track-li" id={bSideLinks[2]}>{bSideTitles[2]}</li>
+                                <li className="list-group-item track-li" id={bSideLinks[3]}>{bSideTitles[3]}</li>
+                                <li className="list-group-item track-li" id={bSideLinks[4]}>{bSideTitles[4]}</li>
                             </ul>
                         </div>
                     </div>

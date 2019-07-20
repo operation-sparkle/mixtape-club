@@ -28,6 +28,7 @@ constructor(props){
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
         sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
+        currentSong: "",
 
     }
     this.onReady = this.onReady.bind(this);
@@ -38,6 +39,7 @@ constructor(props){
     this.onBackward = this.onBackward.bind(this);
     this.onStopBackward = this.onStopBackward.bind(this);
     this.onFlip = this.onFlip.bind(this);
+    this.checkVid = this.checkVid.bind(this);
 
     this.divStyle = {
         borderRadius: '5px',
@@ -120,7 +122,7 @@ constructor(props){
     
 
     onPauseVideo(){
-        console.log('pause');
+        console.log(this.state.player.getVideoUrl());
         this.state.player.pauseVideo();
         this.setState({
             playing: false,
@@ -154,6 +156,19 @@ constructor(props){
         this.state.player.setVolume(100);
     }
 
+    checkVid(event){
+        if(event.data === 1){
+            let urlId = this.state.player.getVideoUrl();
+            urlId = url.replace('https://www.youtube.com/watch?v=','')
+            console.log(urlId);
+            if(this.state.currentSong !== urlId){
+                this.setState({
+                    currentSong: urlId,
+                })
+            }
+        }
+    }
+
     onFlip(){
         if(this.state.sidePlaying[0] === this.state.aSideLinks[0]){
             let sideB = this.state.bSideLinks;
@@ -172,12 +187,12 @@ constructor(props){
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, currentSong, tapeCover} = this.state
         return(
         <div>
             <h4 className="player-tape-label">Mixtape Title</h4>
             <TapeCoverImage tapeCover={tapeCover} />
-            <YouTube className="YouTube-vid" onReady={this.onReady} />
+            <YouTube className="YouTube-vid" onReady={this.onReady} onStateChange={this.checkVid}/>
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >
                     <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
@@ -186,7 +201,7 @@ constructor(props){
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
-                <PlayerSongList onFlip={this.onFlip} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+                <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
                 <UserMixtapesList />
         </div>
         )
