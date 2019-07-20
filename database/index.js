@@ -1,6 +1,8 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    autoIncrement = require ('mongoose-auto-increment');
 mongoose.connect('mongodb://localhost/mtc', {useNewUrlParser: true});
 const findOrCreate = require('mongoose-findorcreate');
+
 
 
 
@@ -9,6 +11,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
     console.log('we live');
 });
+
+autoIncrement.initialize(db);
 
 const playlistSchema = new mongoose.Schema({
     id: Number,
@@ -21,6 +25,7 @@ const playlistSchema = new mongoose.Schema({
     tapeLabel: String,
 });
 playlistSchema.plugin(findOrCreate);
+playlistSchema.plugin(autoIncrement.plugin, "playlist")
 const Playlist = mongoose.model('Playlist', playlistSchema);
 
 
@@ -72,6 +77,18 @@ const storePlaylist = function(plDetails, callback){
     });
 };
 
+
+
+const retrievePlaylist =  function(filter, callback){
+    Playlist.findOne(filter, (err, data) => {
+        if(err){
+            callback(err);
+        } else {
+            callback(data);
+        }
+    });
+}
+
 const updatePlaylist = async function(filter, update, callback){
     // see how params should be passed in
     // new:true allows the data to be the document AFTER the update is made
@@ -89,3 +106,4 @@ module.exports.Playlist = Playlist;
 module.exports.User = User;
 module.exports.storePlaylist = storePlaylist;
 module.exports.updatePlaylist = updatePlaylist;
+module.exports.retrievePlaylist = retrievePlaylist;

@@ -5,6 +5,9 @@ import TapeCoverImage from './TapeCoverImage.jsx';
 import PlayerSongList from './PlayerSongList.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
+import { basename } from 'path';
+
 
 class MixtapePlayer extends React.Component {
 constructor(props){
@@ -15,6 +18,11 @@ constructor(props){
         aSideLinks: ['4D2qcbu26gs', "r52KqG4G678", "Rht7rBHuXW8"],
         bSideLinks: ["8ahU-x-4Gxw", "H1Zm6E6Sy4Y", "fpsOOrwF558"],
         interval: null,
+        playListId: null || this.props.location,
+        aSideTitles: ['placeholder'],
+        bSideTitles: ['placeholder'],
+        tapeCover: ""
+
     }
     this.onReady = this.onReady.bind(this);
     this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -34,6 +42,59 @@ constructor(props){
         marginTop: '15%',
     }
 }
+
+    componentWillMount(){
+        let aVideoArray = [];
+        let bVideoArray = [];
+        let aTitleArray = [];
+        let bTitleArray = [];
+        if(this.state.playListId){
+            const {search} = this.state.playListId;
+            // debugger;
+            let id = search.slice(4);
+            axios.post('/mixtape-player', {
+                id,
+            })
+                .then((response) => {
+                    if(response.data.bSide){
+                        const {aSide, bSide, tapeDeck, tapeLabel, userId} = response.data;
+                        aSide.forEach(video => {
+                            aVideoArray.push(video.id.videoId);
+                            aTitleArray.push(video.snippet.title);
+                        })
+                        bSide.forEach(video => {
+                            bVideoArray.push(video.id.videoId);
+                            bTitleArray.push(video.snippet.title);
+                        })
+                        this.setState({
+                            aSideLinks: aVideoArray,
+                            bSideLinks: bVideoArray,
+                            aSideTitles: aTitleArray,
+                            bSideTitles: bTitleArray,
+                            tapeCover: tapeDeck
+                        })
+                    } else {
+                        const { aSide, tapeDeck, tapeLabel, userId } = response.data;
+                        aSide.forEach(video => {
+                            aVideoArray.push(video.id.videoId);
+                            aTitleArray.push(video.snippet.title);
+                        })
+                        this.setState({
+                            aSideLinks: aVideoArray,
+                            aSideTitles: aTitleArray,
+                            tapeCover: tapeDeck
+                        })
+                    }   
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                })
+        }
+    }
+
+
+
     onReady(event) {
         this.setState({
             player: event.target,
@@ -48,6 +109,7 @@ constructor(props){
             playing: true,
         })
     }
+    
 
     onPauseVideo(){
         console.log('pause');
@@ -84,10 +146,13 @@ constructor(props){
         this.state.player.setVolume(100);
     }
     render (){
+
+        const { onDeckSideA, onDeckSideB } = this.props;
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
         return(
         <div>
-            <TapeCoverImage />
-            <YouTube videoId={'4D2qcbu26gs'} onReady={this.onReady} />
+            <TapeCoverImage tapeCover={tapeCover}/>
+            <YouTube videoId={aSideLinks[0]} onReady={this.onReady} />
                 <div className="row col-9 bg-info d-flex align-items-center" style={this.divStyle}>
                     <div className="col-2" >
                         <FontAwesomeIcon style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
@@ -96,7 +161,8 @@ constructor(props){
                             <FontAwesomeIcon style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
                     </div>
         </div>
-            <PlayerSongList />
+                <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+
         </div>
         )
     };
