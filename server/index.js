@@ -75,6 +75,10 @@ app.get('/getUser', (req, res) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.redirect('http://localhost:3000/mixtape-player');
+});
+
 app.get('/*', (req, res) => {
   if (req.path !== '/auth/google/callback') {
     if (req.path === '/create-mixtapes') {
