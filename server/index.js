@@ -68,6 +68,13 @@ app.get('/logout', (req, res) => {
 // when refreshing on different endpoints, our page would crash.
 // https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 // Read article above for explanation
+app.get('/getUser', (req, res) => {
+  db.findCreate(req.query, (info, response) => {
+    console.log(response);
+    res.send(response);
+  });
+});
+
 app.get('/*', (req, res) => {
   if (req.path !== '/auth/google/callback') {
     if (req.path === '/create-mixtapes' || req.path === '/my-mixtapes') {
@@ -79,6 +86,7 @@ app.get('/*', (req, res) => {
     }
   }
 });
+
 
 
 app.post('/update', (req, res) => {
@@ -93,9 +101,9 @@ app.post('/update', (req, res) => {
 
 app.post('/store', (req, res) => {
   // need to figure out how we are sending info to endpoint
-  const { 
-userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel
- } = req.body;
+  const {
+    userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel,
+  } = req.body;
   const playlistDetails = {
     userId: 'FILLMEIN',
     aSideLinks: JSON.stringify(aSideLinks),
@@ -134,8 +142,8 @@ app.post('/mixtape-player/', (req, res) => {
       res.end('No Results Found');
     } else {
       const {
- aSideLinks, bSideLinks, tapeDeck, tapeLabel, userId 
-} = response;
+        aSideLinks, bSideLinks, tapeDeck, tapeLabel, userId,
+      } = response;
       const aSide = JSON.parse(aSideLinks);
       let bSide;
       if (bSideLinks) {
@@ -162,7 +170,7 @@ app.post('/mixtape-player/', (req, res) => {
     // console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
 
     // use aSide, bSide, tapeDeck, tapeLabel, userId
-    res.end('yeasss');
+    // res.end('yeasss');
   });
 });
 
@@ -172,14 +180,14 @@ app.get('/auth/google',
   passport.authenticate('google', {
     scope:
             ['email', 'profile'],
-  },));
+  }));
 
 // Redirect on success or failure
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-       res.redirect('http://localhost:3000/');
-    });
+    res.redirect('http://localhost:3000/');
+  });
 
 app.get('/', (req, res) => {
   console.log(req);

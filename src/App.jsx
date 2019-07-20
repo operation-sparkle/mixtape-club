@@ -38,9 +38,7 @@ class App extends React.Component {
             sideA: [],
             sideB: [],
             displayImageSelector: true,
-
             isAuthenticated: false,
-
             onDeckSideA: ['Track 1 A', 'Track 2 A', 'Track 3 A', 'Track 4 A', 'Track 5 A'],
             onDeckSideB: ['Track 1 B', 'Track 2 B', 'Track 3 B', 'Track 4 B', 'Track 5 B'],
             googleId: 'FILL_ME_IN',
@@ -84,8 +82,20 @@ class App extends React.Component {
     }
 
     componentDidMount(){
+        const {googleId} = this.state;
         this.authenticateUser();
         console.log(this.state.isAuthenticated);
+        axios.get('/getUser', {
+            googleId
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.error('Error searching:', err)
+        })
+
+
     }
 
     onChange(event){
