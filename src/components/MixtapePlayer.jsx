@@ -3,10 +3,15 @@ import ReactDOM from "react-dom";
 import YouTube from 'react-youtube';
 import TapeCoverImage from './TapeCoverImage.jsx';
 import PlayerSongList from './PlayerSongList.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons'
+import UserMixtapesList from './UserMixtapes.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
+import { library, config } from '@fortawesome/fontawesome-svg-core'
+// config.autoAddCss = false
 import axios from 'axios';
 import { basename } from 'path';
+
+import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
 
 class MixtapePlayer extends React.Component {
@@ -21,7 +26,7 @@ constructor(props){
         playListId: null || this.props.location,
         aSideTitles: ['placeholder'],
         bSideTitles: ['placeholder'],
-        tapeCover: ""
+        tapeCover: LisaFrankenstein,
 
     }
     this.onReady = this.onReady.bind(this);
@@ -153,17 +158,17 @@ constructor(props){
             <h4 className="player-tape-label">Mixtape Title</h4>
             <TapeCoverImage tapeCover={tapeCover} />
             <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
-                <div className="row col-12 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
-                    <div className="row col-6 col-md-12" >
-                    <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
-                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
-                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
-                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
+                <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
+                    <div className="row col-12 col-md-12" >
+                    <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-            </div>
-
+                <UserMixtapesList />
+        </div>
         )
     };
 }
