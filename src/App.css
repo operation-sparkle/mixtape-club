@@ -177,6 +177,13 @@
   height: 36px;
 }
 
+.user-mixes {
+  color: #17a2b8;
+}
+.user-mixes:hover {
+  color: #999;
+}
+
 footer {
   height: 40px;
   padding: 1rem 2rem 2rem;

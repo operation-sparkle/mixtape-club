@@ -32,6 +32,7 @@ constructor(props){
         userPlaylists: [],
         tapeTitle: 'Untitled',
         currentSong: "",
+        userName: '',
 
     }
     
@@ -72,8 +73,10 @@ componentWillMount() {
         })
         .then((response) => {
             const {data} = response;
+            console.log('Data from front', data);
             this.setState({
-                userPlaylists: data,
+                userPlaylists: data.response,
+                userName: data.displayName,
             })
         })
         .catch((err) => {
@@ -219,7 +222,7 @@ componentWillMount() {
 
         const { onDeckSideA, onDeckSideB } = this.props;
 
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong} = this.state
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong, userName} = this.state
 
         return(
         <div>
@@ -235,7 +238,7 @@ componentWillMount() {
                     </div>
                 </div>
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList userPlaylists={userPlaylists} />
+                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} />
         </div>
         )
     };

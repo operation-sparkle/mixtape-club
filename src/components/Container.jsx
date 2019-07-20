@@ -8,7 +8,7 @@ import MixtapePlayer from "./MixtapePlayer.jsx";
 
 function Container(props) {
 
-    const { isAuthenticated, authenticateUser, location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onDeckSideA, onDeckSideB, onSavePlaylist, tapeBackgroundColor, onDelete, queryParam, googleId} = props;
+    const { isAuthenticated, authenticateUser, location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onDeckSideA, onDeckSideB, onSavePlaylist, tapeBackgroundColor, onDelete, queryParam, googleId } = props;
    
     return (
             <section className="route-section">
