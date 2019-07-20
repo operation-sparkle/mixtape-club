@@ -28,14 +28,11 @@ constructor(props){
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
         sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
-<<<<<<< HEAD
         googleId: null || this.props.googleId,
         userPlaylists: [],
-=======
         tapeTitle: 'Untitled',
         currentSong: "",
 
->>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
     }
     
     this.getUserPlaylists()
@@ -153,14 +150,8 @@ componentWillMount() {
         })
     }
 
-<<<<<<< HEAD
-
-    onPauseVideo() {
-        console.log('pause');
-=======
     onPauseVideo(){
         console.log(this.state.player.getVideoUrl());
->>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
         this.state.player.pauseVideo();
         this.setState({
             playing: false,
@@ -227,11 +218,7 @@ componentWillMount() {
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
-<<<<<<< HEAD
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists} = this.state
-=======
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, tapeTitle, currentSong} = this.state
->>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong} = this.state
         return(
         <div>
             <h4 className="player-tape-label">{tapeTitle}</h4>
@@ -245,16 +232,11 @@ componentWillMount() {
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
-<<<<<<< HEAD
-                <PlayerSongList onFlip={this.onFlip} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList  userPlaylists={userPlaylists} />
-            </div>
-=======
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList />
+                <UserMixtapesList userPlaylists={userPlaylists} />
         </div>
->>>>>>> a25c998c8efd2d777606bb40319b7c2447573cc3
         )
     };
 }
+
 export default MixtapePlayer;

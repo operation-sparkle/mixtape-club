@@ -83,6 +83,7 @@ app.get('/userPlaylists', (req, res) => {
     console.log(response);
     res.send(response);
   });
+});
 app.get('/', (req, res) => {
   res.redirect('http://localhost:3000/mixtape-player');
 });
