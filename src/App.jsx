@@ -69,11 +69,13 @@ class App extends React.Component {
     authenticateUser(){
         axios.get('/user/')
         .then((response)=> {
-            console.log(response);
+           // console.log(response);
             if(response.data.verified){
                 this.setState({
                     isAuthenticated: true,
+                    googleId: response.data.id
                 })
+                console.log(this.state.googleId);
             }
         })
         .catch((err)=>{
@@ -84,9 +86,6 @@ class App extends React.Component {
     componentDidMount(){
         this.authenticateUser();
         console.log(this.state.isAuthenticated);
-
-        
-
     }
 
     onChange(event){

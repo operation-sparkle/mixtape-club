@@ -159,10 +159,11 @@ constructor(props){
                         <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
                         <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
                         <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
-
+                    </div>
+                </div>
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+            </div>
 
-        </div>
         )
     };
 }
