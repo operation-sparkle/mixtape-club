@@ -103,7 +103,7 @@ app.post('/store', (req, res) => {
     userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel,
   } = req.body;
   const playlistDetails = {
-    userId: 'FILLMEIN',
+    userId,
     aSideLinks: JSON.stringify(aSideLinks),
     bSideLinks: JSON.stringify(bSideLinks),
     tapeDeck,

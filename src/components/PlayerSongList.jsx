@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const PlayerSongList = (props) => {
-    const { aSideTitles, bSideTitles } = props;
-    console.log(aSideTitles);
+    const { aSideTitles, bSideTitles, onFlip } = props;
+    
     return (
 
         <div className="border border-info playlist-builder-player mx-auto shadow-sm p-3 mb-5 bg-white rounded">
@@ -37,7 +37,7 @@ const PlayerSongList = (props) => {
                         </div>
                     </div>
                 </div>
-                <button className="btn btn-info col-12 col-md-3 flip-button">Flip Tape</button>
+                <button onClick={onFlip} className="btn btn-info col-12 col-md-3 flip-button">Flip Tape</button>
             </div>
         </div>
     )
