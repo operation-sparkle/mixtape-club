@@ -94,6 +94,16 @@ const retrievePlaylist = (filter, callback) => {
   });
 };
 
+const getAllPlaylists = (filter, callback) => {
+  Playlist.find(filter, (err,data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(data);
+    }
+  });
+};
+
 const updatePlaylist = async function (filter, update, callback) {
   // see how params should be passed in
   // new:true allows the data to be the document AFTER the update is made
@@ -111,3 +121,4 @@ module.exports.User = User;
 module.exports.storePlaylist = storePlaylist;
 module.exports.updatePlaylist = updatePlaylist;
 module.exports.retrievePlaylist = retrievePlaylist;
+module.exports.getAllPlaylists = getAllPlaylists;

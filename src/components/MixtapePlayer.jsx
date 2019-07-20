@@ -15,53 +15,75 @@ import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
 
 class MixtapePlayer extends React.Component {
-constructor(props){
-    super(props);
-    this.state = {
-        player: null,
-        playing: false,
-        aSideLinks: ['4D2qcbu26gs', "r52KqG4G678", "Rht7rBHuXW8"],
-        bSideLinks: ["8ahU-x-4Gxw", "H1Zm6E6Sy4Y", "fpsOOrwF558"],
-        interval: null,
-        playListId: null || this.props.location,
-        aSideTitles: ['placeholder'],
-        bSideTitles: ['placeholder'],
-        tapeCover: LisaFrankenstein,
+    constructor(props) {
+        super(props);
+        this.state = {
+            player: null,
+            playing: false,
+            aSideLinks: ['4D2qcbu26gs', "r52KqG4G678", "Rht7rBHuXW8"],
+            bSideLinks: ["8ahU-x-4Gxw", "H1Zm6E6Sy4Y", "fpsOOrwF558"],
+            interval: null,
+            playListId: null || this.props.location,
+            aSideTitles: ['placeholder'],
+            bSideTitles: ['placeholder'],
+            tapeCover: LisaFrankenstein,
+            userPlaylists: [],
+            googleId: null || this.props.googleId
 
-    }
-    this.onReady = this.onReady.bind(this);
-    this.onPlayVideo = this.onPlayVideo.bind(this);
-    this.onPauseVideo = this.onPauseVideo.bind(this);
-    this.onForward = this.onForward.bind(this);
-    this.onStopForward = this.onStopForward.bind(this);
-    this.onBackward = this.onBackward.bind(this);
-    this.onStopBackward = this.onStopBackward.bind(this);
+        }
+        this.onReady = this.onReady.bind(this);
+        this.onPlayVideo = this.onPlayVideo.bind(this);
+        this.onPauseVideo = this.onPauseVideo.bind(this);
+        this.onForward = this.onForward.bind(this);
+        this.onStopForward = this.onStopForward.bind(this);
+        this.onBackward = this.onBackward.bind(this);
+        this.onStopBackward = this.onStopBackward.bind(this);
 
-    this.divStyle = {
-        borderRadius: '5px',
-        marginTop: '-360px'
+        this.divStyle = {
+            borderRadius: '5px',
+            marginTop: '-360px'
         }
 
-    this.iconStyle = {
-        margin: '3% 0',
+        this.iconStyle = {
+            margin: '3% 0',
+        }
     }
-}
 
-    componentWillMount(){
+    componentWillMount() {
+        this.loadShared()
+        if(this.state.googleId !== null){
+            this.getUserPlaylists()
+        }
+    }
+
+    getUserPlaylists(){
+        const {googleId} = this.state
+        axios.get('/userPlaylists', {
+            googleId
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((err) => {
+            console.error('Error searching:', err)
+        })
+    }
+
+    loadShared() {
         let aVideoArray = [];
         let bVideoArray = [];
         let aTitleArray = [];
         let bTitleArray = [];
-        if(this.state.playListId){
-            const {search} = this.state.playListId;
+        if (this.state.playListId) {
+            const { search } = this.state.playListId;
             // debugger;
             let id = search.slice(4);
             axios.post('/mixtape-player', {
                 id,
             })
                 .then((response) => {
-                    if(response.data.bSide){
-                        const {aSide, bSide, tapeDeck, tapeLabel, userId} = response.data;
+                    if (response.data.bSide) {
+                        const { aSide, bSide, tapeDeck, tapeLabel, userId } = response.data;
                         aSide.forEach(video => {
                             aVideoArray.push(video.id.videoId);
                             aTitleArray.push(video.snippet.title);
@@ -88,7 +110,7 @@ constructor(props){
                             aSideTitles: aTitleArray,
                             tapeCover: tapeDeck
                         })
-                    }   
+                    }
                 })
                 .catch((error) => {
                     // handle error
@@ -97,25 +119,23 @@ constructor(props){
         }
     }
 
-
-
     onReady(event) {
         this.setState({
             player: event.target,
         });
-        this.state.player.loadPlaylist({playlist: this.state.bSideLinks});
+        this.state.player.loadPlaylist({ playlist: this.state.bSideLinks });
     }
 
-    onPlayVideo(){
+    onPlayVideo() {
         console.log('play');
         this.state.player.playVideo();
         this.setState({
             playing: true,
         })
     }
-    
 
-    onPauseVideo(){
+
+    onPauseVideo() {
         console.log('pause');
         this.state.player.pauseVideo();
         this.setState({
@@ -123,52 +143,52 @@ constructor(props){
         })
     }
 
-    onForward(){
-       
+    onForward() {
+
         this.state.player.setPlaybackRate(2);
         this.state.player.setVolume(50);
     }
 
-    onStopForward(){
+    onStopForward() {
         this.state.player.setPlaybackRate(1.0);
         this.state.player.setVolume(100);
     }
 
-    onBackward(){
+    onBackward() {
         console.log('reverse');
         let time = this.state.player.getCurrentTime();
         this.state.player.setVolume(50);
-        this.state.interval = setInterval(()=> {
+        this.state.interval = setInterval(() => {
             time -= 2;
             this.state.player.seekTo(time);
         }, 90)
     }
 
-    onStopBackward(){
+    onStopBackward() {
         clearInterval(this.state.interval);
         this.state.player.playVideo();
         this.state.player.setVolume(100);
     }
-    render (){
+    render() {
 
-        const { onDeckSideA, onDeckSideB } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
-        return(
-        <div>
-            <h4 className="player-tape-label">Mixtape Title</h4>
-            <TapeCoverImage tapeCover={tapeCover} />
-            <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
+        const { onDeckSideA, onDeckSideB, googleId } = this.props;
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover } = this.state
+        return (
+            <div>
+                <h4 className="player-tape-label">Mixtape Title</h4>
+                <TapeCoverImage tapeCover={tapeCover} />
+                <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >
-                    <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
-                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
+                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} />
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
                 <UserMixtapesList />
-        </div>
+            </div>
         )
     };
 }

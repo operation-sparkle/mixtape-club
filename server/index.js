@@ -75,6 +75,13 @@ app.get('/getUser', (req, res) => {
   });
 });
 
+app.get('/userPlaylists', (req, res) => {
+  db.getAllPlaylists(req.query, (info, response) => {
+    console.log(response);
+    res.send(response);
+  });
+});
+
 app.get('/*', (req, res) => {
   if (req.path !== '/auth/google/callback') {
     if (req.path === '/create-mixtapes' || req.path === '/my-mixtapes') {
