@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const PlayerSongList = (props) => {
-    const { aSideTitles, bSideTitles, onFlip } = props;
+    const { aSideTitles, bSideTitles, currentSong, aSideLinks, bSideLinks, onFlip } = props;
     
     return (
 
@@ -19,20 +19,20 @@ const PlayerSongList = (props) => {
                     <div className="tab-content" id="v-pills-tabContent">
                         <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <ul className="list-group list-group-flush builder-tracks">
-                                <li className="list-group-item track-li">{aSideTitles[0]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[1]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[2]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[3]} </li>
-                                <li className="list-group-item track-li">{aSideTitles[4]} </li>
+                                <li className="list-group-item track-li" style={(currentSong === aSideLinks[0]) ? {backgroundColor: "#a7dae7"} : {backgroundColor: "#fff"}} >{aSideTitles[0]} </li>
+                                <li className="list-group-item track-li" style={(currentSong === aSideLinks[1]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{aSideTitles[1]} </li>
+                                <li className="list-group-item track-li" style={(currentSong === aSideLinks[2]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{aSideTitles[2]} </li>
+                                <li className="list-group-item track-li" style={(currentSong === aSideLinks[3]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{aSideTitles[3]} </li>
+                                <li className="list-group-item track-li" style={(currentSong === aSideLinks[4]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{aSideTitles[4]} </li>
                             </ul>
                         </div>
                         <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <ul className="list-group list-group-flush builder-tracks">
-                                <li className="list-group-item track-li">{bSideTitles[0]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[1]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[2]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[3]}</li>
-                                <li className="list-group-item track-li">{bSideTitles[4]}</li>
+                                <li className="list-group-item track-li" style={(currentSong === bSideLinks[0]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{bSideTitles[0]}</li>
+                                <li className="list-group-item track-li" style={(currentSong === bSideLinks[1]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{bSideTitles[1]}</li>
+                                <li className="list-group-item track-li" style={(currentSong === bSideLinks[2]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{bSideTitles[2]}</li>
+                                <li className="list-group-item track-li" style={(currentSong === bSideLinks[3]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{bSideTitles[3]}</li>
+                                <li className="list-group-item track-li" style={(currentSong === bSideLinks[4]) ? { backgroundColor: "#a7dae7" } : { backgroundColor: "#fff" }} >{bSideTitles[4]}</li>
                             </ul>
                         </div>
                     </div>
