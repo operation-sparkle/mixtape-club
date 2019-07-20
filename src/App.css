@@ -104,7 +104,7 @@
 }
 
 .tape-cover-image {
-  margin: -360px auto 1rem;
+  margin: -160px auto 1rem;
   display: block;
   max-width: 500px;
   z-index: -10;
@@ -112,7 +112,7 @@
 
 .tape-deck-image {
   margin-bottom: 20px;
-  margin-top: -240px;
+  margin-top: -40px;
 }
 
 .nav-pills > a {
@@ -129,10 +129,10 @@
 }
 
 .player-tape-label {
-  margin: 270px 0 0;
+  margin: 90px 0 0;
   text-align: center;
   font-family: 'Permanent Marker', sans-serif;
-  font-size: 2.2rem;
+  font-size: 1.2rem;
   z-index: -1;
 }
 
@@ -147,6 +147,7 @@
 
 .ui-button {
   color: #333;
+  font-size: 0.5rem;
 }
 
 .ui-button:hover {
@@ -184,6 +185,22 @@ footer {
   font-family: 'Permanent Marker', sans-serif;
   font-size: 2.2rem;
   z-index: -1;
+}
+
+.tape-cover-image {
+  margin: -360px auto 1rem;
+  display: block;
+  max-width: 500px;
+  z-index: -10;
+}
+
+.tape-deck-image {
+  margin-bottom: 20px;
+  margin-top: -240px;
+}
+
+.ui-button {
+  font-size: 2rem;
 }
 
 }

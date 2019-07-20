@@ -35,7 +35,6 @@ constructor(props){
         }
 
     this.iconStyle = {
-        fontSize: '2.5rem',
         margin: '3% 0',
     }
 }
@@ -146,12 +145,12 @@ constructor(props){
             <h4 className="player-tape-label">Mixtape Title</h4>
             <TapeCoverImage />
             <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
-                <div className="row col-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
-                    <div className="row col-12" >
-                    <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
-                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
-                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
-                        <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
+                <div className="row col-12 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
+                    <div className="row col-6 col-md-12" >
+                    <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
+                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
+                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
+                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
         </div>
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
