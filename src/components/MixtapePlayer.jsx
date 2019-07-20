@@ -20,13 +20,14 @@ constructor(props){
     this.state = {
         player: null,
         playing: false,
-        aSideLinks: ['4D2qcbu26gs', "r52KqG4G678", "Rht7rBHuXW8"],
-        bSideLinks: ["8ahU-x-4Gxw", "H1Zm6E6Sy4Y", "fpsOOrwF558"],
+        aSideLinks: ["r52KqG4G678", "Rht7rBHuXW8"],
+        bSideLinks: ["H1Zm6E6Sy4Y", "fpsOOrwF558"],
         interval: null,
         playListId: null || this.props.location,
         aSideTitles: ['placeholder'],
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
+        sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
 
     }
     this.onReady = this.onReady.bind(this);
@@ -36,6 +37,7 @@ constructor(props){
     this.onStopForward = this.onStopForward.bind(this);
     this.onBackward = this.onBackward.bind(this);
     this.onStopBackward = this.onStopBackward.bind(this);
+    this.onFlip = this.onFlip.bind(this);
 
     this.divStyle = {
         borderRadius: '5px',
@@ -75,7 +77,8 @@ constructor(props){
                             bSideLinks: bVideoArray,
                             aSideTitles: aTitleArray,
                             bSideTitles: bTitleArray,
-                            tapeCover: tapeDeck
+                            tapeCover: tapeDeck,
+                            sidePlaying: aVideoArray
                         })
                     } else {
                         const { aSide, tapeDeck, tapeLabel, userId } = response.data;
@@ -86,7 +89,8 @@ constructor(props){
                         this.setState({
                             aSideLinks: aVideoArray,
                             aSideTitles: aTitleArray,
-                            tapeCover: tapeDeck
+                            tapeCover: tapeDeck,
+                            sidePlaying: aVideoArray
                         })
                     }   
                 })
@@ -103,7 +107,7 @@ constructor(props){
         this.setState({
             player: event.target,
         });
-        this.state.player.loadPlaylist({playlist: this.state.bSideLinks});
+        this.state.player.loadPlaylist({playlist: this.state.sidePlaying});
     }
 
     onPlayVideo(){
@@ -149,6 +153,22 @@ constructor(props){
         this.state.player.playVideo();
         this.state.player.setVolume(100);
     }
+
+    onFlip(){
+        if(this.state.sidePlaying[0] === this.state.aSideLinks[0]){
+            let sideB = this.state.bSideLinks;
+            this.setState({
+                sidePlaying: sideB,
+            })       
+            this.state.player.loadPlaylist({playlist: sideB});
+        } else if(this.state.sidePlaying[0] === this.state.bSideLinks[0]){
+            let sideA = this.state.aSideLinks;
+            this.setState({
+                sidePlaying: sideA,
+            })
+            this.state.player.loadPlaylist({ playlist: sideA });
+        } 
+    }
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
@@ -157,7 +177,7 @@ constructor(props){
         <div>
             <h4 className="player-tape-label">Mixtape Title</h4>
             <TapeCoverImage tapeCover={tapeCover} />
-            <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
+            <YouTube className="YouTube-vid" onReady={this.onReady} />
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >
                     <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
@@ -166,7 +186,7 @@ constructor(props){
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
-                <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+                <PlayerSongList onFlip={this.onFlip} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
                 <UserMixtapesList />
         </div>
         )
