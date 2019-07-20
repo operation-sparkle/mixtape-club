@@ -73,7 +73,6 @@ class App extends React.Component {
                     isAuthenticated: true,
                     googleId: response.data.id
                 })
-                console.log(this.state.googleId);
             }
         })
         .catch((err)=>{
@@ -112,7 +111,6 @@ class App extends React.Component {
     }
 
     onPauseVideo() {
-        console.log('stop');
         this.state.player.pauseVideo();
         this.setState({
             playing: false,
@@ -152,14 +150,10 @@ class App extends React.Component {
 
     onSelectTapeImage(event, tape) {
         const { tapeBackgroundColor } = this.state;
-        // this.setState({
-        //     tapeBackgroundColor: 'white',
-        // })
-        event.currentTarget.style.backgroundColor = '#17a2b8';
+     
         this.setState({
             builderImage: tape,
         })
-        console.log(this.state);
     }
 
     onTapeLabelChange(event) {
