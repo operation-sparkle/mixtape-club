@@ -24,7 +24,7 @@ constructor(props){
         bSideLinks: ["H1Zm6E6Sy4Y", "fpsOOrwF558"],
         interval: null,
         playListId: null || this.props.location,
-        aSideTitles: ['placeholder'],
+        aSideTitles: ['placeholder', 'spaceholder'],
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
         sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
@@ -159,7 +159,7 @@ constructor(props){
     checkVid(event){
         if(event.data === 1){
             let urlId = this.state.player.getVideoUrl();
-            urlId = url.replace('https://www.youtube.com/watch?v=','')
+            urlId = urlId.replace('https://www.youtube.com/watch?v=','')
             console.log(urlId);
             if(this.state.currentSong !== urlId){
                 this.setState({
