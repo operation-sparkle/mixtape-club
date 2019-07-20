@@ -7,9 +7,9 @@ import PlaylistBuilderList from './PlaylistBuilderList.jsx';
 import SearchPlayer from './SearchPlayer.jsx';
 
 const CreateMixtapes = (props) => {
-    const { searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onSavePlaylist, tapeBackgroundColor, onDelete } = props;
+    const { searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onSavePlaylist, tapeBackgroundColor, onDelete, queryParam } = props;
 
-    console.log(tapeBackgroundColor);
+    // console.log(tapeBackgroundColor);
    
   
     return (
@@ -19,7 +19,7 @@ const CreateMixtapes = (props) => {
             <Search onSearch={onSearch} onChange={onChange} />
             <SearchPlayer onPlayVideo={onPlayVideo} onReady={onReady} onPauseVideo={onPauseVideo} playing={playing} searchResults={searchResults} selectedResult={selectedResult} onPassToSideA={onPassToSideA} onPassToSideB={onPassToSideB} />
             <SearchList searchResults={searchResults} onResultClick={onResultClick}/>
-            <PlaylistBuilderList builderImage={builderImage} tapeLabel={tapeLabel} sideA={sideA} sideB={sideB} onSaveImage={onSaveImage} onSavePlaylist={onSavePlaylist} onDelete={onDelete} />
+            <PlaylistBuilderList builderImage={builderImage} tapeLabel={tapeLabel} sideA={sideA} sideB={sideB} onSaveImage={onSaveImage} onSavePlaylist={onSavePlaylist} onDelete={onDelete} queryParam={queryParam}/>
         </div>}
         </div>
     )

@@ -76,20 +76,31 @@ app.post('/store' , (req, res) => {
             tapeDeck,
             tapeLabel,
         }
-        console.log(playlistDetails);
+        // console.log(playlistDetails);
         db.storePlaylist(playlistDetails, (response) => {
         console.log(response)
         res.end('Playlist Stored')
     });
 });
 
+app.post('/getLink', (req, res) => {
+    const {key} = req.body
+    const filter = {aSideLinks: key}
+    db.retrievePlaylist(filter, (response) => {
+        if(response === null) {
+            res.end('No Results Found')
+        } else {
+            console.log(response._id);
+
+            res.send({id: response._id});
+        }
+    });
+});
 
 app.post('/mixtape-player/', (req, res) => {
     //need to do this dynamically
     const {id} = req.body
-    let hold = id.slice(10)
-    let actualId = hold.slice(0, hold.length - 2)
-    const filter = {_id : ObjectId(actualId)}
+    const filter = {_id : id}
 
     db.retrievePlaylist(filter, (response) => {
         if(response === null){
@@ -119,11 +130,11 @@ app.post('/mixtape-player/', (req, res) => {
                 }
             }
 
-            console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
+            // console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
 
             // use aSide, bSide, tapeDeck, tapeLabel, userId
             res.end('yeasss')
-        }
+        });
         
     });
 
