@@ -5,7 +5,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
-const db = require('../database/index.js')
+const db = require('../database/index.js');
 const ObjectId = require('mongodb').ObjectID;
 
 require('dotenv').config();
@@ -91,99 +91,99 @@ app.post('/update', (req, res) => {
   });
 });
 
-app.post('/store' , (req, res) => {
-    // need to figure out how we are sending info to endpoint
-    const {userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel} = req.body
-    const playlistDetails = {
-            userId: 'FILLMEIN',
-            aSideLinks: JSON.stringify(aSideLinks),
-            bSideLinks: JSON.stringify(bSideLinks),
-            tapeDeck,
-            tapeLabel,
-        }
-        // console.log(playlistDetails);
-        db.storePlaylist(playlistDetails, (response) => {
-        console.log(response)
-        res.end('Playlist Stored')
-    });
+app.post('/store', (req, res) => {
+  // need to figure out how we are sending info to endpoint
+  const { 
+userId, aSideLinks, bSideLinks, tapeDeck, tapeLabel
+ } = req.body;
+  const playlistDetails = {
+    userId: 'FILLMEIN',
+    aSideLinks: JSON.stringify(aSideLinks),
+    bSideLinks: JSON.stringify(bSideLinks),
+    tapeDeck,
+    tapeLabel,
+  };
+  // console.log(playlistDetails);
+  db.storePlaylist(playlistDetails, (response) => {
+    console.log(response);
+    res.end('Playlist Stored');
+  });
 });
 
 app.post('/getLink', (req, res) => {
-    const {key} = req.body
-    const filter = {aSideLinks: key}
-    db.retrievePlaylist(filter, (response) => {
-        if(response === null) {
-            res.end('No Results Found')
-        } else {
-            console.log(response._id);
+  const { key } = req.body;
+  const filter = { aSideLinks: key };
+  db.retrievePlaylist(filter, (response) => {
+    if (response === null) {
+      res.end('No Results Found');
+    } else {
+      console.log(response._id);
 
-            res.send({id: response._id});
-        }
-    });
+      res.send({ id: response._id });
+    }
+  });
 });
 
 app.post('/mixtape-player/', (req, res) => {
-    //need to do this dynamically
-    const {id} = req.body
-    const filter = {_id : id}
+  // need to do this dynamically
+  const { id } = req.body;
+  const filter = { _id: id };
 
-    db.retrievePlaylist(filter, (response) => {
-        if(response === null){
-            res.end('No Results Found');
-        } else {
-            const {aSideLinks, bSideLinks, tapeDeck, tapeLabel, userId} = response
-            let aSide = JSON.parse(aSideLinks);
-            let bSide;
-            if(bSideLinks){
-                bSide = JSON.parse(bSideLinks);
-                const data = {
-                    aSide,
-                    bSide,
-                    tapeDeck,
-                    tapeLabel,
-                    userId
-                }
-                res.send(data);
-                } else {
-                    const data = {
-                        aSide,
-                        tapeDeck,
-                        tapeLabel,
-                        userId
-                    }
-                    res.send(data);
-                }
-            }
+  db.retrievePlaylist(filter, (response) => {
+    if (response === null) {
+      res.end('No Results Found');
+    } else {
+      const {
+ aSideLinks, bSideLinks, tapeDeck, tapeLabel, userId 
+} = response;
+      const aSide = JSON.parse(aSideLinks);
+      let bSide;
+      if (bSideLinks) {
+        bSide = JSON.parse(bSideLinks);
+        const data = {
+          aSide,
+          bSide,
+          tapeDeck,
+          tapeLabel,
+          userId,
+        };
+        res.send(data);
+      } else {
+        const data = {
+          aSide,
+          tapeDeck,
+          tapeLabel,
+          userId,
+        };
+        res.send(data);
+      }
+    }
 
-            // console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
+    // console.log(aSide[0], bSide[0].snippet,tapeDeck, tapeLabel, userId)
 
-            // use aSide, bSide, tapeDeck, tapeLabel, userId
-            res.end('yeasss')
-        });
-        
-    });
-
+    // use aSide, bSide, tapeDeck, tapeLabel, userId
+    res.end('yeasss');
+  });
+});
 
 
 // This will call google's authentication
 app.get('/auth/google',
-    passport.authenticate('google', {
-        scope:
-            ['email', 'profile']
-    }
-    ));
+  passport.authenticate('google', {
+    scope:
+            ['email', 'profile'],
+  },));
 
 // Redirect on success or failure
 app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function (req, res) {
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
        res.redirect('http://localhost:3000/');
     });
 
 app.get('/', (req, res) => {
-    console.log(req);
-    res.render('/');
-
+  console.log(req);
+  res.render('/');
 });
 
 app.post('/search', (req, res) => {
