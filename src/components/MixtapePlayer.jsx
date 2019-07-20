@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import YouTube from 'react-youtube';
 import TapeCoverImage from './TapeCoverImage.jsx';
 import PlayerSongList from './PlayerSongList.jsx';
+import UserMixtapesList from './UserMixtapes.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
 import { library, config } from '@fortawesome/fontawesome-svg-core'
@@ -166,7 +167,7 @@ constructor(props){
                     </div>
                 </div>
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-
+                <UserMixtapesList />
         </div>
         )
     };

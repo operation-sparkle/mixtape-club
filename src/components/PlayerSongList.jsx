@@ -7,7 +7,7 @@ const PlayerSongList = (props) => {
     console.log(aSideTitles);
     return (
 
-        <div className="border border-info playlist-builder shadow-sm p-3 mb-5 bg-white rounded">
+        <div className="border border-info playlist-builder-player shadow-sm p-3 mb-5 bg-white rounded">
             <div className="row">
                 <div className="col-sm-4 col-md-2" style={{ marginTop: "1rem" }}>
                     <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -41,14 +41,6 @@ const PlayerSongList = (props) => {
         </div>
     )
 }
-
-// <ul className="list-group col-sm-10 col-md-8 search-list">
-//     <li className="list-group-item active bg-info">Tracks:</li>
-//     <li className="list-group-item">Track 1</li>
-//     <li className="list-group-item">Track 2</li>
-//     <li className="list-group-item">Track 3</li>
-//     <li className="list-group-item">Track 4</li>
-// </ul>
 
 
 export default PlayerSongList;

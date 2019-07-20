@@ -6,7 +6,7 @@ const UserMixtapesList = (props) => {
     const { searchResults } = props;
     console.log(props);
     return (
-        <ul className="list-group col-sm-10 col-md-8 search-list">
+        <ul className="list-group col-12 col-md-8 my-mixtape-list">
             <li className="list-group-item active bg-info">My Mixtapes:</li>
             <li className="list-group-item">Mixtape 1</li>
             <li className="list-group-item">Mixtape 2</li>
