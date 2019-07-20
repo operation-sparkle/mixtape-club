@@ -3,7 +3,6 @@ import React from 'react';
 import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 import CassetteDeck from '../assets/img/cassette-deck.png';
 
-
 const TapeCoverImage = (props) => {
     const {tapeCover} = props
     return (
