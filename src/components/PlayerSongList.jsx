@@ -37,7 +37,7 @@ const PlayerSongList = (props) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={onFlip} className="btn btn-info col-12 col-md-3 flip-button">Flip Tape</button>
+                <button onClick={onFlip} className="btn btn-info col-12 col-md-3 flip-button mx-auto">Flip Tape</button>
             </div>
         </div>
     )
