@@ -103,16 +103,25 @@
   text-align: center;
 }
 
+.delete {
+  font-size: 1rem;
+}
+
 .tape-cover-image {
-  margin: -160px auto 1rem;
+  margin: -168px auto 1rem;
   display: block;
-  max-width: 500px;
+  max-width: 170px !important;
   z-index: -10;
+  position: relative;
 }
 
 .tape-deck-image {
-  margin-bottom: 20px;
-  margin-top: -40px;
+  display: block;
+  margin: -92px auto 20px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+  padding: 0rem !important;
+  border-radius: 8px;
+  position: absolute;
 }
 
 .nav-pills > a {
@@ -129,10 +138,10 @@
 }
 
 .player-tape-label {
-  margin: 90px 0 0;
+  margin: 150px 0 0;
   text-align: center;
   font-family: 'Permanent Marker', sans-serif;
-  font-size: 1.2rem;
+  font-size: .7rem;
   z-index: -1;
 }
 
@@ -142,23 +151,90 @@
 }
 
 .player-ui {
-  margin-top: -100px;
+  margin-top: -110px;
+  padding: 6px 0 0 10px !important;
+  
+  margin-right: -40px !important;
 }
 
 .ui-button {
   color: #333;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
 }
 
 .ui-button:hover {
   color: #999;
 }
 
+.playlist-builder-player {
+  margin-top: 2rem;
+  margin-bottom: -1rem !important;
+}
+
+.my-mixtape-list {
+  margin-top: -2rem;
+  padding: 0rem !important;
+}
 
 footer {
   height: 40px;
   padding: 1rem 2rem 2rem;
   margin: 1rem -1rem 0rem;
+}
+/***** x-small devices only *****/
+@media (max-width: 575.98px) { 
+  .tape-deck-image {
+  display: block;
+  margin: -92px auto 20px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+  padding: 0rem !important;
+  border-radius: 8px;
+  max-width: 340px !important;
+  position: absolute;
+}
+
+.player-ui {
+  max-width: 240px !important;
+}
+}
+
+/***** Small devices (landscape phones, 576px and up) *****/
+@media (min-width: 576px) and (max-width: 767.98px) { 
+  .tape-cover-image {
+  margin: -266px auto 1rem;
+  display: block;
+  max-width: 320px !important;
+  z-index: -10;
+  position: relative;
+}
+
+.player-ui {
+  margin-top: -380px !important;
+  padding: -30px 0 0 10px !important;
+  margin-right: -40px !important;
+  max-width: 360px !important;
+}
+
+.ui-button {
+  color: #333;
+  font-size: 1.6rem;
+}
+
+.player-tape-label {
+  margin: 194px 0 0;
+  font-size: 1rem;
+  z-index: -1;
+}
+
+.tape-deck-image {
+  display: block;
+  margin: -138px auto 20px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+  padding: 0rem !important;
+  border-radius: 8px;
+  max-width: 540px !important;
+  position: absolute;
+}
 }
 
 /***** Medium devices (tablets, 768px and up) *****/
@@ -180,27 +256,45 @@ footer {
 }
 
 .player-tape-label {
-  margin: 270px 0 0;
+  margin: 240px 0 0;
   text-align: center;
   font-family: 'Permanent Marker', sans-serif;
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   z-index: -1;
 }
 
 .tape-cover-image {
-  margin: -360px auto 1rem;
+  margin: -430px auto 1rem;
   display: block;
-  max-width: 500px;
+  max-width: 370px !important;
   z-index: -10;
 }
 
 .tape-deck-image {
-  margin-bottom: 20px;
-  margin-top: -240px;
+  margin-bottom: 100px;
+  margin-top: -190px;
+  max-width: 740px !important;
+}
+
+.player-ui {
+  margin-top: -340px !important;
+  padding: -30px 0 0 10px !important;
+  margin-right: -40px !important;
+  max-width: 360px !important;
 }
 
 .ui-button {
   font-size: 2rem;
+}
+
+.playlist-builder-player {
+  max-width: 740px !important;
+}
+
+.my-mixtape-list {
+  margin-top: -2rem;
+  padding: 0rem !important;
+  max-width: 740px !important;
 }
 
 }

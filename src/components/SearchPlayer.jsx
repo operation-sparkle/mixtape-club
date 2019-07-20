@@ -30,7 +30,7 @@ const SearchPlayer = (props) => {
     
     const vidStyle = {
         opacity: '0%',
-        marginLeft: '-1000px',
+        marginLeft: '-2000px',
         marginTop: '0.5rem',
     }
     return (

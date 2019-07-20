@@ -33,23 +33,24 @@ const Playlist = mongoose.model('Playlist', playlistSchema);
 const userSchema = new mongoose.Schema({
   id: Number,
   googleId: String,
+  displayName: String,
 });
 userSchema.plugin(findOrCreate);
 const User = mongoose.model('User', userSchema);
 
 
-const findCreate = function (googleInfo, callback) {
+const findCreate = (googleInfo, callback) => {
   // uses a findOrCreate plugin to check and if not found add a user to our tables;
   // googleInfo is an object passed through with the profile.id
-  const { googleId } = googleInfo;
-  User.findOrCreate({ googleId }, (err, user, created) => {
+  const { googleId, displayName } = googleInfo;
+  User.findOrCreate({ googleId, displayName }, (err, user, created) => {
     if (created === true) {
-      console.log(`User ${googleId} was created`);
+      console.log(`User ${googleId} was created: ${displayName}`);
       callback(null, user);
     } else {
-      User.findOrCreate({ googleId }, (err, user, created) => {
+      User.findOrCreate({ googleId, displayName }, (err, user, created) => {
         if (created === false) {
-          console.log(`User ${googleId} exists`);
+          console.log(`User ${displayName} exists`);
           // user is the model
           callback(null, user);
         }
@@ -58,7 +59,7 @@ const findCreate = function (googleInfo, callback) {
   });
 };
 
-const storePlaylist = function (plDetails, callback) {
+const storePlaylist = (plDetails, callback) => {
   // plDetails is an object with all of our columns needing to be saved
   // when sending in request, please be sure  to include all fields, all are stings.
   const {
@@ -83,7 +84,7 @@ const storePlaylist = function (plDetails, callback) {
 };
 
 
-const retrievePlaylist = function (filter, callback) {
+const retrievePlaylist = (filter, callback) => {
   Playlist.findOne(filter, (err, data) => {
     if (err) {
       callback(err);

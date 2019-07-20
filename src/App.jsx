@@ -43,9 +43,9 @@ class App extends React.Component {
             onDeckSideB: ['Track 1 B', 'Track 2 B', 'Track 3 B', 'Track 4 B', 'Track 5 B'],
             googleId: 'FILL_ME_IN',
             tapeBackgroundColor: '#fff',
-            queryParam: ""
-
+            queryParam: "",
         }
+
         this.onSearch = this.onSearch.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -73,7 +73,6 @@ class App extends React.Component {
                     isAuthenticated: true,
                     googleId: response.data.id
                 })
-                console.log(this.state.googleId);
             }
         })
         .catch((err)=>{
@@ -84,7 +83,7 @@ class App extends React.Component {
     componentDidMount(){
         const {googleId} = this.state;
         this.authenticateUser();
-        console.log(this.state.isAuthenticated);
+        
         axios.get('/getUser', {
             googleId
         })
@@ -112,7 +111,6 @@ class App extends React.Component {
     }
 
     onPauseVideo() {
-        console.log('stop');
         this.state.player.pauseVideo();
         this.setState({
             playing: false,
@@ -126,7 +124,7 @@ class App extends React.Component {
     }
 
     logout (){
-        console.log('logged out');
+        
         axios.get('/logout');
         this.setState({
             isAuthenticated: false,
@@ -152,14 +150,10 @@ class App extends React.Component {
 
     onSelectTapeImage(event, tape) {
         const { tapeBackgroundColor } = this.state;
-        // this.setState({
-        //     tapeBackgroundColor: 'white',
-        // })
-        event.currentTarget.style.backgroundColor = '#17a2b8';
+     
         this.setState({
             builderImage: tape,
         })
-        console.log(this.state);
     }
 
     onTapeLabelChange(event) {
@@ -218,28 +212,34 @@ class App extends React.Component {
                 tapeDeck: image,
                 tapeLabel
         })
-            .then(function (response) {
+            .then((response) =>{
                 // handle success
                 // console.warn(response.config.data);
                 let newId = JSON.parse(response.config.data);
                 // const {userId} = response.config.data;
                 let key = JSON.stringify(newId.aSideLinks);
-                console.warn(key);
+               
                 axios.post('/getlink', {
                     key
                 })
-                .then(function (response) {
+                .then((response) => {
                     //
-                    console.log(response.data.id, 'get call')
+                    console.log(response.data, 'get call')
+                    
                     this.setState({
                         queryParam: response.data.id
                     })
+                
+                    axios.get(`/mixtape-player?id=${response.data.id}`)
+                    .then(()=> {
+                        console.log('tape saved');
+                    })
                 })
-                .catch(function (error) {
+                .catch((error) => {
                     console.log(error);
                 })
             })
-            .catch(function (error) {
+            .catch((error) =>{
                 // handle error
                 console.log(error);
             })
