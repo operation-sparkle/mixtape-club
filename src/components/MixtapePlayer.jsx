@@ -8,6 +8,7 @@ import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-
 import axios from 'axios';
 import { basename } from 'path';
 
+
 class MixtapePlayer extends React.Component {
 constructor(props){
     super(props);
@@ -19,7 +20,9 @@ constructor(props){
         interval: null,
         playListId: null || this.props.location,
         aSideTitles: ['placeholder'],
-        bSideTitles: ['placeholder']
+        bSideTitles: ['placeholder'],
+        tapeCover: ""
+
     }
     this.onReady = this.onReady.bind(this);
     this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -46,8 +49,9 @@ constructor(props){
         let bTitleArray = [];
         if(this.state.playListId){
             const {search} = this.state.playListId;
-            let id = search.slice(4).replace(/%22/g, '"');
-            axios.post('mixtape-player', {
+            // debugger;
+            let id = search.slice(4);
+            axios.post('/mixtape-player', {
                 id,
             })
                 .then((response) => {
@@ -65,19 +69,21 @@ constructor(props){
                             aSideLinks: aVideoArray,
                             bSideLinks: bVideoArray,
                             aSideTitles: aTitleArray,
-                            bSideTitles: bTitleArray
+                            bSideTitles: bTitleArray,
+                            tapeCover: tapeDeck
                         })
                     } else {
-                        const { aSide,tapeDeck, tapeLabel, userId } = response.data;
+                        const { aSide, tapeDeck, tapeLabel, userId } = response.data;
                         aSide.forEach(video => {
                             aVideoArray.push(video.id.videoId);
                             aTitleArray.push(video.snippet.title);
                         })
                         this.setState({
                             aSideLinks: aVideoArray,
-                            aSideTitles: aTitleArray
+                            aSideTitles: aTitleArray,
+                            tapeCover: tapeDeck
                         })
-                    }
+                    }   
                 })
                 .catch((error) => {
                     // handle error
@@ -103,6 +109,7 @@ constructor(props){
         })
     }
     
+
     onPauseVideo(){
         console.log('pause');
         this.state.player.pauseVideo();
@@ -138,12 +145,13 @@ constructor(props){
         this.state.player.setVolume(100);
     }
     render (){
+
         const { onDeckSideA, onDeckSideB } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles} = this.state
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
         return(
         <div>
             <h4 className="player-tape-label">Mixtape Title</h4>
-            <TapeCoverImage />
+            <TapeCoverImage tapeCover={tapeCover} />
             <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
                 <div className="row col-12 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-6 col-md-12" >
@@ -151,9 +159,9 @@ constructor(props){
                         <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
                         <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
                         <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
-                    </div>
-        </div>
+
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
+
         </div>
         )
     };
