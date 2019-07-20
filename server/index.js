@@ -81,6 +81,8 @@ app.get('/*', (req, res) => {
       if (!req.user) {
         res.redirect('http://localhost:3000/login');
       }
+    } else if (req.path === '/') {
+      res.redirect('http://localhost:3000/mixtape-player');
     } else {
       res.sendFile(path.join(__dirname, '../dist/index.html'));
     }
