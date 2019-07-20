@@ -34,12 +34,11 @@ constructor(props){
 
     this.divStyle = {
         borderRadius: '5px',
-        marginTop: '-300px'
+        marginTop: '-360px'
         }
 
     this.iconStyle = {
-        fontSize: '2.5rem',
-        marginTop: '15%',
+        margin: '3% 0',
     }
 }
 
@@ -151,16 +150,16 @@ constructor(props){
         const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover} = this.state
         return(
         <div>
-            <TapeCoverImage tapeCover={tapeCover}/>
-            <YouTube videoId={aSideLinks[0]} onReady={this.onReady} />
-                <div className="row col-9 bg-info d-flex align-items-center" style={this.divStyle}>
-                    <div className="col-2" >
-                        <FontAwesomeIcon style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
-                            <FontAwesomeIcon style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
-                            <FontAwesomeIcon style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
-                            <FontAwesomeIcon style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
-                    </div>
-        </div>
+            <h4 className="player-tape-label">Mixtape Title</h4>
+            <TapeCoverImage tapeCover={tapeCover} />
+            <YouTube className="YouTube-vid" videoId={aSideLinks[0]} onReady={this.onReady} />
+                <div className="row col-12 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
+                    <div className="row col-6 col-md-12" >
+                    <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faBackward} onMouseDown={this.onBackward} onMouseUp={this.onStopBackward} />
+                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPause} onClick={this.onPauseVideo} /> 
+                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faPlay} onClick={this.onPlayVideo} />
+                        <FontAwesomeIcon className="col-md-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
+
                 <PlayerSongList aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
 
         </div>
