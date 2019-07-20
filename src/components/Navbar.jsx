@@ -7,8 +7,7 @@ const Navigation = (props) => {
   
 
     return (
-        <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-info">
-            
+        <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-info"> 
             <Link to="/mixtape-player" className="navbar-brand">Mixtape Club</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

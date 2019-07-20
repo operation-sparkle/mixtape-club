@@ -28,6 +28,7 @@ constructor(props){
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
         sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
+        tapeTitle: 'Untitled',
         currentSong: "",
 
     }
@@ -80,7 +81,8 @@ constructor(props){
                             aSideTitles: aTitleArray,
                             bSideTitles: bTitleArray,
                             tapeCover: tapeDeck,
-                            sidePlaying: aVideoArray
+                            sidePlaying: aVideoArray,
+                            tapeTitle: tapeLabel
                         })
                     } else {
                         const { aSide, tapeDeck, tapeLabel, userId } = response.data;
@@ -92,7 +94,8 @@ constructor(props){
                             aSideLinks: aVideoArray,
                             aSideTitles: aTitleArray,
                             tapeCover: tapeDeck,
-                            sidePlaying: aVideoArray
+                            sidePlaying: aVideoArray,
+                            tapeTitle: tapeLabel
                         })
                     }   
                 })
@@ -187,10 +190,10 @@ constructor(props){
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, currentSong, tapeCover} = this.state
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, tapeTitle, currentSong} = this.state
         return(
         <div>
-            <h4 className="player-tape-label">Mixtape Title</h4>
+            <h4 className="player-tape-label">{tapeTitle}</h4>
             <TapeCoverImage tapeCover={tapeCover} />
             <YouTube className="YouTube-vid" onReady={this.onReady} onStateChange={this.checkVid}/>
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>

@@ -53,7 +53,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }),
   (req, res) => {
-    res.redirect('http://localhost:3000/');
+    res.redirect('http://localhost:3000/mixtape-player');
   });
 
 
@@ -75,12 +75,18 @@ app.get('/getUser', (req, res) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.redirect('http://localhost:3000/mixtape-player');
+});
+
 app.get('/*', (req, res) => {
   if (req.path !== '/auth/google/callback') {
-    if (req.path === '/create-mixtapes' || req.path === '/my-mixtapes') {
+    if (req.path === '/create-mixtapes') {
       if (!req.user) {
         res.redirect('http://localhost:3000/login');
       }
+    } else if (req.path === '/') {
+      res.redirect('http://localhost:3000/mixtape-player');
     } else {
       res.sendFile(path.join(__dirname, '../dist/index.html'));
     }
