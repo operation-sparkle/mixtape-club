@@ -47,8 +47,8 @@ constructor(props){
     this.onStopBackward = this.onStopBackward.bind(this);
     this.onFlip = this.onFlip.bind(this);
     this.checkVid = this.checkVid.bind(this);
+    this.pageRefresh = this.pageRefresh.bind(this);
     this.onToggleShareLink = this.onToggleShareLink.bind(this);
-
     
     this.divStyle = {
         borderRadius: '5px',
@@ -223,13 +223,16 @@ componentWillMount() {
             this.state.player.loadPlaylist({ playlist: sideA });
         } 
     }
+    
+    pageRefresh(){
+        location.reload()
+    }
 
     onToggleShareLink() {
         this.setState({
             toggleLink: true,
         })
     }
-
 
     render (){
 
@@ -250,8 +253,9 @@ componentWillMount() {
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
+
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} currentPlaylistId={currentPlaylistId} toggleLink={toggleLink} onToggleLink={this.onToggleShareLink} />
-                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} />
+                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} pageRefresh={this.pageRefresh} />
         </div>
         )
     };
