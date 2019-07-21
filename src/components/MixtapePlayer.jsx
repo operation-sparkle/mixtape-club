@@ -47,7 +47,7 @@ constructor(props){
     this.onStopBackward = this.onStopBackward.bind(this);
     this.onFlip = this.onFlip.bind(this);
     this.checkVid = this.checkVid.bind(this);
-    this.pageRefresh = this.pageRefresh.bind(this);
+    this.tapeRefresh = this.tapeRefresh.bind(this);
     this.onToggleShareLink = this.onToggleShareLink.bind(this);
     
     this.divStyle = {
@@ -241,7 +241,7 @@ componentWillMount() {
         if(event.data === 1){
             let urlId = this.state.player.getVideoUrl();
             urlId = urlId.replace('https://www.youtube.com/watch?v=','')
-            console.log(urlId);
+            
             if(this.state.currentSong !== urlId){
                 this.setState({
                     currentSong: urlId,
@@ -267,16 +267,48 @@ componentWillMount() {
                 sidePlaying: sideA,
             })
             this.state.player.loadPlaylist({ playlist: sideA });
-        } 
+        }      
     }
     
     /**
      * Function called to refresh the page and load a mix when a playlist is
      * clicked.
      */
-    pageRefresh(){
-        location.reload()
-    }
+    tapeRefresh(event){
+        
+        // location.reload()
+        
+        this.state.userPlaylists.forEach((playlist) => {
+            
+            if (playlist['_id'] === Number(event.currentTarget.id) && playlist.aSideLinks !== undefined) {
+                let aVideoArray = [];
+                let bVideoArray = [];
+                let aTitleArray = [];
+                let bTitleArray = [];
+                let aSideLinks = JSON.parse(playlist.aSideLinks);
+                let bSideLinks = JSON.parse(playlist.bSideLinks);
+                aSideLinks.forEach(video => {
+                    aVideoArray.push(video.id.videoId);
+                    aTitleArray.push(video.snippet.title);
+                })
+                bSideLinks.forEach(video => {
+                    bVideoArray.push(video.id.videoId);
+                    bTitleArray.push(video.snippet.title);
+                })
+                this.setState({
+                    aSideLinks: aVideoArray,
+                    bSideLinks: bVideoArray,
+                    aSideTitles: aTitleArray,
+                    bSideTitles: bTitleArray,
+                    tapeCover: playlist.tapeDeck,
+                    sidePlaying: aVideoArray,
+                    tapeTitle: playlist.tapeLabel
+               });
+                this.state.player.loadPlaylist({ playlist: aVideoArray });
+            }
+    })
+}
+    
 
     /**
      * Function triggered by the share mixtape button that determines whether or not the
@@ -307,7 +339,7 @@ componentWillMount() {
                 </div>
 
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} currentPlaylistId={currentPlaylistId} toggleLink={toggleLink} onToggleLink={this.onToggleShareLink} />
-                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} pageRefresh={this.pageRefresh} />
+                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} tapeRefresh={this.tapeRefresh} />
         </div>
         )
     };
