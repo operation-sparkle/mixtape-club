@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 const Navigation = (props) => {
-    const {logout, isAuthenticated} = props;
-
-  
+    const { logout, isAuthenticated } = props;
 
     return (
         <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-info"> 
@@ -25,6 +23,7 @@ const Navigation = (props) => {
                         {isAuthenticated ? <Link className="nav-link" to="/login" onClick={logout}>Logout</Link> : <Link to="/login"  className="nav-link">Login</Link>}
                     </li>
                 </ul>
+                
   </div>
 </nav>
     )

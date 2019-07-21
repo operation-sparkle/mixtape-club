@@ -104,6 +104,10 @@
   font-size: 1rem;
 }
 
+.save-image {
+  margin-top: 1rem;
+}
+
 .tape-cover-image {
   margin: -168px auto 1rem;
   display: block;
@@ -175,6 +179,19 @@
 
 .flip-button {
   height: 36px;
+  margin-bottom: 0.8rem;
+}
+
+.user-mixes {
+  color: #17a2b8;
+}
+.user-mixes:hover {
+  color: #999;
+}
+
+.url {
+  font-size: .82rem;
+  word-wrap: break-word;
 }
 
 footer {
