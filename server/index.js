@@ -77,12 +77,12 @@ app.get('/getUser', (req, res) => {
 });
 
 app.get('/userPlaylists', (req, res) => {
-  const { id } = req.user;
-  // console.log(id);
+  const { id, displayName } = req.user;
+   console.log(displayName);
   db.getAllPlaylists({ userId: id }, (info, response) => {
-    console.log('bbbbbbbbbbbbbbbbbbbbbbbb');
     console.log(response);
-    res.send(response);
+    const data = { response, displayName };
+    res.send(data);
   });
 });
 

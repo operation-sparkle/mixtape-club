@@ -7,7 +7,7 @@ import UserMixtapesList from './UserMixtapes.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
 import { library, config } from '@fortawesome/fontawesome-svg-core'
-// config.autoAddCss = false
+
 import axios from 'axios';
 import { basename } from 'path';
 
@@ -32,7 +32,9 @@ constructor(props){
         userPlaylists: [],
         tapeTitle: 'Untitled',
         currentSong: "",
-
+        userName: '',
+        currentPlaylistId: '',
+        toggleLink: false,
     }
     
     this.getUserPlaylists()
@@ -46,7 +48,7 @@ constructor(props){
     this.onFlip = this.onFlip.bind(this);
     this.checkVid = this.checkVid.bind(this);
     this.pageRefresh = this.pageRefresh.bind(this);
-
+    this.onToggleShareLink = this.onToggleShareLink.bind(this);
     
     this.divStyle = {
         borderRadius: '5px',
@@ -73,8 +75,11 @@ componentWillMount() {
         })
         .then((response) => {
             const {data} = response;
+  
             this.setState({
-                userPlaylists: data,
+                userPlaylists: data.response,
+                userName: data.displayName,
+                // currentPlaylistId: data.response[0]._id,
             })
         })
         .catch((err) => {
@@ -89,7 +94,11 @@ componentWillMount() {
         let bTitleArray = [];
         if (this.state.playListId) {
             const { search } = this.state.playListId;
-            // debugger;
+
+            this.setState({
+                currentPlaylistId: search,
+            });
+
             let id = search.slice(4);
             axios.post('/mixtape-player', {
                 id,
@@ -219,11 +228,17 @@ componentWillMount() {
         location.reload()
     }
 
+    onToggleShareLink() {
+        this.setState({
+            toggleLink: true,
+        })
+    }
+
     render (){
 
         const { onDeckSideA, onDeckSideB } = this.props;
 
-        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong} = this.state
+        const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong, userName, currentPlaylistId, toggleLink} = this.state;
 
         return(
         <div>
@@ -238,8 +253,9 @@ componentWillMount() {
                         <FontAwesomeIcon className="col-3 ui-button" style={this.iconStyle} icon={faForward} onMouseDown={this.onForward} onMouseUp={this.onStopForward} />
                     </div>
                 </div>
-                <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList userPlaylists={userPlaylists} pageRefresh={this.pageRefresh}/>
+
+                <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} currentPlaylistId={currentPlaylistId} toggleLink={toggleLink} onToggleLink={this.onToggleShareLink} />
+                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} pageRefresh={this.pageRefresh} />
         </div>
         )
     };
