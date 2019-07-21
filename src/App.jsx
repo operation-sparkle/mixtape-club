@@ -185,7 +185,7 @@ class App extends React.Component {
      * 
      * @param {object} tape - Object containing name and color of selected tape image.
      */
-    onSelectTapeImage(tape) {
+    onSelectTapeImage(event, tape) {
         this.setState({
             builderImage: tape,
         })
@@ -275,6 +275,7 @@ class App extends React.Component {
      */
     onSavePlaylist() {
         const {googleId, sideA, sideB, builderImage, tapeLabel} = this.state;
+        console.log(this.state);
         const {image, name} = builderImage
         axios.post('/store', {
                 userId: googleId,
