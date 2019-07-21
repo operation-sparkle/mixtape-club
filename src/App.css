@@ -104,6 +104,10 @@
   font-size: 1rem;
 }
 
+.save-image {
+  margin-top: 1rem;
+}
+
 .tape-cover-image {
   margin: -168px auto 1rem;
   display: block;
