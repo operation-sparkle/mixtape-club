@@ -229,11 +229,11 @@ class App extends React.Component {
                     this.setState({
                         queryParam: response.data.id
                     })
-                
-                    axios.get(`/mixtape-player?id=${response.data.id}`)
-                    .then(()=> {
-                        console.log('tape saved');
-                    })
+                    location.assign(`/mixtape-player?id=${response.data.id}`)
+                    // axios.get(`/mixtape-player?id=${response.data.id}`)
+                    // .then(()=> {
+                    //     console.log('tape saved');
+                    // })
                 })
                 .catch((error) => {
                     console.log(error);
