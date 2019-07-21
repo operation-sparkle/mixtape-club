@@ -45,6 +45,7 @@ constructor(props){
     this.onStopBackward = this.onStopBackward.bind(this);
     this.onFlip = this.onFlip.bind(this);
     this.checkVid = this.checkVid.bind(this);
+    this.pageRefresh = this.pageRefresh.bind(this);
 
     
     this.divStyle = {
@@ -213,7 +214,10 @@ componentWillMount() {
             this.state.player.loadPlaylist({ playlist: sideA });
         } 
     }
-
+    
+    pageRefresh(){
+        location.reload()
+    }
 
     render (){
 
@@ -235,7 +239,7 @@ componentWillMount() {
                     </div>
                 </div>
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} />
-                <UserMixtapesList userPlaylists={userPlaylists} />
+                <UserMixtapesList userPlaylists={userPlaylists} pageRefresh={this.pageRefresh}/>
         </div>
         )
     };
