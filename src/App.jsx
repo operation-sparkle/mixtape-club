@@ -280,15 +280,4 @@ class App extends React.Component {
     }
 }
 
-// <div className="App">
-//     <Navigation />
-//     <Hero />
-//     <Search onChange={this.onChange} onSearch={this.onSearch} />
-//     <LoginBox />
-//     <SearchList searchResults={searchResults} />
-//     <PlaylistImageSelector />
-//     <PlaylistBuilderList />
-//     <footer className="text-info bg-light">Created by Team Operation Sparkle.</footer>
-// </div>
-
 ReactDOM.render(<App />, document.getElementById("app"));

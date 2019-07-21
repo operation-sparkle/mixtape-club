@@ -6,6 +6,11 @@ import SearchList from './SearchList.jsx';
 import PlaylistBuilderList from './PlaylistBuilderList.jsx';
 import SearchPlayer from './SearchPlayer.jsx';
 
+/** CreateMixtapes component renders all components associated with creation of a mixtape, including
+ * PlaylistImageSelector, Search, SearchPlayer, SearchList, and SearchBuilderList at the 
+ * create-mixtapes route and is a child component of Container.
+ */
+
 const CreateMixtapes = (props) => {
 
     const { authenticateUser, searchResults, onSearch, onChange, onPlayVideo, onPauseVideo, onReady, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onSavePlaylist, tapeBackgroundColor, onDelete, queryParam } = props;
