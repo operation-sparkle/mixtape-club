@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const PlayerSongList = (props) => {
-    const { aSideTitles, bSideTitles, currentSong, aSideLinks, bSideLinks, onFlip } = props;
+    const { aSideTitles, bSideTitles, currentSong, aSideLinks, bSideLinks, onFlip, currentPlaylistId, toggleLink, onToggleLink } = props;
+
+    console.log(currentPlaylistId);
     
     return (
 
@@ -15,7 +17,7 @@ const PlayerSongList = (props) => {
                         <a className="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Side B</a>
                     </div>
                 </div>
-                <div className="col-sm-4 col-md-5">
+                <div className="col-sm-4 col-md-7">
                     <div className="tab-content" id="v-pills-tabContent">
                         <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <ul className="list-group list-group-flush builder-tracks">
@@ -37,7 +39,11 @@ const PlayerSongList = (props) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={onFlip} className="btn btn-info col-12 col-md-3 flip-button mx-auto">Flip Tape</button>
+                <div className=" col-12 col-md-3">
+                    <button onClick={onFlip} className="btn btn-info col-12 flip-button mx-auto">Flip Tape</button>
+                    <button onClick={onToggleLink} className="btn btn-outline-info flip-button col-12 mx-auto">Share Mixtape</button>
+                    {toggleLink ? <p className="col-12 url" ><b>Link: </b>{`http://mixtapeclub.tk:3000/mixtape-player${currentPlaylistId}`}</p> : null}
+                </div>
             </div>
         </div>
     )

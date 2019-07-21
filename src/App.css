@@ -175,6 +175,7 @@
 
 .flip-button {
   height: 36px;
+  margin-bottom: 0.8rem;
 }
 
 .user-mixes {
@@ -182,6 +183,11 @@
 }
 .user-mixes:hover {
   color: #999;
+}
+
+.url {
+  font-size: .82rem;
+  word-wrap: break-word;
 }
 
 footer {
