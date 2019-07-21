@@ -1,4 +1,9 @@
 import React from 'react';
+
+/** Search component renders a search text input and button to search for songs to add to mixtapes
+ * at the create-mixtapes route and is a child component of CreateMixtapes.
+ */
+
 const Search = (props) => {
     const {onChange, onSearch} = props;
     return (

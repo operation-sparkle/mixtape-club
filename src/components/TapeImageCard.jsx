@@ -1,5 +1,9 @@
 import React from 'react';
 
+/** TapeImageCard component renders each of the individual cassette tape options that the user can
+ * choose from at the create-mixtape route and is a child component of PlaylistImageSelector
+ */
+
 const TapeImageCard = (props) => {
     const { builderImage, tapeImage, selectImage, tapeBackgroundColor } = props;
     return (

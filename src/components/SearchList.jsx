@@ -4,6 +4,9 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 import SearchListItem from './SearchListItem.jsx';
 
+/** SearchList component renders list of searched songs at the create-mixtapes route
+ * and is a child component of CreateMixtapes.
+ */
 
 const SearchList = (props) => {
     const { searchResults, onResultClick} = props;

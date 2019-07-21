@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+/** UserMixtapesList component renders list of mixtapes created by the currently logged in user
+ * at the mixtape-player route and is a child component of MixtapePlayer
+ */
+
 const UserMixtapesList = (props) => {
     const { searchResults, userPlaylists, userName, pageRefresh } = props;
     
