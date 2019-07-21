@@ -64,6 +64,7 @@ app.get('/user/', (req, res) => {
 app.get('/logout', (req, res) => {
   req.logOut();
   console.log('logged out');
+  res.end('logged out');
 });
 // when refreshing on different endpoints, our page would crash.
 // https://tylermcginnis.com/react-router-cannot-get-url-refresh/
