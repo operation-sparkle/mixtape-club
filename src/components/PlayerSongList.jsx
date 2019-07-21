@@ -8,8 +8,6 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const PlayerSongList = (props) => {
     const { aSideTitles, bSideTitles, currentSong, aSideLinks, bSideLinks, onFlip, currentPlaylistId, toggleLink, onToggleLink } = props;
-
-    console.log(currentPlaylistId);
     
     return (
 
