@@ -3,6 +3,10 @@ import React from 'react';
 import TapeImageCard from './TapeImageCard.jsx';
 import TapeLabel from './TapeLabel.jsx';
 
+/** PlaylistImageSelector component renders a list of cassette tape images, a text input for the mixtape
+ * title, and save button at the create-mixtapes route and is a child component of CreateMixtapes.
+ */
+
 const PlaylistImageSelector = (props) => {
     const { builderImage, tapeImages, selectImage, onLabelChange, onSaveImage, tapeBackgroundColor } = props;
     

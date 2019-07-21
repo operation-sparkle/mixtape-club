@@ -2,6 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
+/** PlaylistBuilderList component renders the cassette image, title, and song selections of the user
+ * at the create-mixtapes route and is a child component of CreateMixtapes.
+ */
+
 const PlaylistBuilderList = (props) => {
     const { builderImage, tapeLabel, sideA , sideB, onSaveImage, onSavePlaylist, onDelete } = props;
     

@@ -1,5 +1,9 @@
 import React from 'react';
 
+/** SearchListItem component renders each song in the list of searched for songs
+ * at the create-mixtape route and is a child component of SearchList
+ */
+
 const SearchListItem = (props) => {
     const { searchResult, onResultClick } = props;
    

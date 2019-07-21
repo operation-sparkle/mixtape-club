@@ -5,6 +5,8 @@
   font-family: 'Saira', Arial, Helvetica, sans-serif;
 }
 
+/** Login view header styles **/
+
 .hero {
   background: 
     linear-gradient(
@@ -37,6 +39,8 @@
   margin: 0rem auto;
 }
 
+/** Login component syles **/
+
 .login-card {
   box-shadow: .2rem .2rem .2rem rgba(0, 0, 0, .3);
   display: block;
@@ -44,6 +48,8 @@
   text-align: center;
   padding: 0 0 1rem !important;
 }
+
+/** Search component styles **/
 
 .search {
   display: block;
@@ -66,6 +72,8 @@
 .search-item:hover {
   background-color: #a7dae7;
 }
+
+/** Create Mixtape interface component syles **/
 
 .player-button-row {
   display: block;
@@ -108,6 +116,21 @@
   margin-top: 1rem;
 }
 
+.nav-pills > a {
+    color: #17a2b8 !important;
+}
+
+.nav-pills > a.active {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+}
+
+.list-group-item .track-li {
+  padding: 0.1rem .5rem !important;
+}
+
+/** Mixtape Player Component Styles **/
+
 .tape-cover-image {
   margin: -168px auto 1rem;
   display: block;
@@ -123,19 +146,6 @@
   padding: 0rem !important;
   border-radius: 8px;
   position: absolute;
-}
-
-.nav-pills > a {
-    color: #17a2b8 !important;
-}
-
-.nav-pills > a.active {
-    background-color: #17a2b8 !important;
-    color: #fff !important;
-}
-
-.list-group-item .track-li {
-  padding: 0.1rem .5rem !important;
 }
 
 .player-tape-label {
@@ -194,12 +204,16 @@
   word-wrap: break-word;
 }
 
+/** Footer Component styles **/
+
 footer {
   height: 40px;
   padding: 1rem 2rem 2rem;
   margin: 1rem -1rem 0rem;
   text-align: center;
 }
+
+/*********** MEDIA QUERIES ************/
 /***** x-small devices only *****/
 @media (max-width: 575.98px) { 
   .tape-deck-image {
@@ -269,11 +283,11 @@ footer {
   margin: 0rem -1rem 2rem !important;
 }
 
-  #title {
-    font-size: 5rem;
+#title {
+  font-size: 5rem;
 }
 
-  .tape-image-card {
+.tape-image-card {
   margin: .5rem;
   max-width: 31%;
 }
@@ -319,5 +333,4 @@ footer {
   padding: 0rem !important;
   max-width: 740px !important;
 }
-
 }

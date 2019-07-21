@@ -2,6 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
+/** PlayerSongList component renders list of songs in the currently playing mixtape
+ * at the mixtape-player route and is a child component of MixtapePlayer.
+ */
+
 const PlayerSongList = (props) => {
     const { aSideTitles, bSideTitles, currentSong, aSideLinks, bSideLinks, onFlip, currentPlaylistId, toggleLink, onToggleLink } = props;
     

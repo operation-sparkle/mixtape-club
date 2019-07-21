@@ -6,6 +6,11 @@ import Login from "./Login.jsx";
 import CreateMixtapes from "./CreateMixtapes.jsx";
 import MixtapePlayer from "./MixtapePlayer.jsx";
 
+/** Container component handles the front-end routing/rendering of the app and renders the Login,
+ * CreateMixtapes, and MixtapePlayer components at their respective routes. Container is a child 
+ * component of App.
+ */
+
 function Container(props) {
 
     const { isAuthenticated, authenticateUser, location, searchResults, onChange, onSearch, onPlayVideo, onReady, onPauseVideo, onResultClick, playing, selectedResult, tapeImages, builderImage, selectImage, tapeLabel, onLabelChange, onPassToSideA, sideA, onPassToSideB, sideB, displayImageSelector, onSaveImage, onDeckSideA, onDeckSideB, onSavePlaylist, tapeBackgroundColor, onDelete, queryParam, googleId } = props;

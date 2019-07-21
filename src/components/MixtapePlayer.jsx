@@ -13,6 +13,11 @@ import { basename } from 'path';
 
 import LisaFrankenstein from '../assets/img/tapes/lisa-frankenstein-tape.gif';
 
+/** MixtapePlayer component is stateful and renders the entire mixtape-player route with it's child
+ * componenets. It is a child component of Container.  Mixtape player also stores information about a
+ * logged in user's playlists so that they can be rendered and played.
+ */
+
 
 class MixtapePlayer extends React.Component {
 constructor(props){
@@ -326,8 +331,8 @@ componentWillMount() {
 
         return(
         <div>
-            <h4 className="player-tape-label">{tapeTitle}</h4>
-            <TapeCoverImage tapeCover={tapeCover} />
+        <TapeCoverImage tapeCover={tapeCover} />
+        <h4 className="player-tape-label">{tapeTitle}</h4>
             <YouTube className="YouTube-vid" onReady={this.onReady} onStateChange={this.checkVid}/>
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >

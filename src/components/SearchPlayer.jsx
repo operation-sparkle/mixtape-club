@@ -3,6 +3,9 @@ import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faPlus } from '@fortawesome/free-solid-svg-icons'
 
+/** Search Player component renders the player interface connected with the Search component 
+ * at the create-mixtapes route and is a child component of CreateMixtapes
+ */
 
 const SearchPlayer = (props) => {
     const { onReady, onPlayVideo, onPauseVideo, playing, selectedResult, onPassToSideA, onPassToSideB } = props;
