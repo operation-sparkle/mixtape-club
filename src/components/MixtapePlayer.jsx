@@ -333,6 +333,7 @@ componentWillMount() {
         <div>
         <h4 className="player-tape-label">{tapeTitle}</h4>
         <TapeCoverImage tapeCover={tapeCover} />
+
             <YouTube className="YouTube-vid" onReady={this.onReady} onStateChange={this.checkVid}/>
                 <div className="row col-9 col-md-6 d-flex align-items-center player-ui mx-auto" style={this.divStyle}>
                     <div className="row col-12 col-md-12" >
