@@ -47,7 +47,7 @@ constructor(props){
     this.onStopBackward = this.onStopBackward.bind(this);
     this.onFlip = this.onFlip.bind(this);
     this.checkVid = this.checkVid.bind(this);
-    this.pageRefresh = this.pageRefresh.bind(this);
+    this.tapeRefresh = this.tapeRefresh.bind(this);
     this.onToggleShareLink = this.onToggleShareLink.bind(this);
     
     this.divStyle = {
@@ -66,10 +66,15 @@ componentWillMount() {
     }
 }
 
-
+/**
+ * Function makes get request to the server, which then retrieves
+ * the users playlists from the database based on their googleId.
+ * When retrieved the userPlaylists and userName are stored on the
+ * state of the component.
+ */
     getUserPlaylists(){
         const {googleId} = this.state
-        console.log(googleId, 'what')
+        
         axios.get('/userPlaylists', {
             googleId
         })
@@ -87,6 +92,10 @@ componentWillMount() {
         })
     }
 
+    /**
+     * Function retrieves the shared playlist from the database by querying
+     * using the playlistId. The playlist is then loaded into the mixtapePlayer.
+     */
     loadShared() {
         let aVideoArray = [];
         let bVideoArray = [];
@@ -145,6 +154,11 @@ componentWillMount() {
         }
     }
 
+    /**
+     * Function listens for the youTube player to be fully loaded, then loads
+     * the playlist into the player using the built-in YouTube Player API function
+     * loadPlaylist. The video starts once the playlist loads.
+     */
     onReady(event) {
         this.setState({
             player: event.target,
@@ -152,35 +166,53 @@ componentWillMount() {
         this.state.player.loadPlaylist({playlist: this.state.sidePlaying});
     }
 
+    /**
+     *  Function triggered by the play button to change the state of the player to playing.
+     *  The playVideo function is a built-in function of the YouTube Player API.
+     */
     onPlayVideo() {
-        console.log('play');
         this.state.player.playVideo();
         this.setState({
             playing: true,
         })
     }
 
+    /**
+     * Function triggered by the pause button that calls the built-in player pause function and 
+     * sets the state of playing to false.
+     */
     onPauseVideo(){
-        console.log(this.state.player.getVideoUrl());
         this.state.player.pauseVideo();
         this.setState({
             playing: false,
         })
     }
 
+    /**
+     * Function triggered by the fast-forward button. Mimics fast-forward by changing the playback
+     * rate and lowering the volume while the button is held-down.
+     */
     onForward() {
-
         this.state.player.setPlaybackRate(2);
         this.state.player.setVolume(50);
     }
-
+    
+    /**
+     * Function that restores the volume and speed of the player when the fast-forward
+     * button is released.
+     */
     onStopForward() {
         this.state.player.setPlaybackRate(1.0);
         this.state.player.setVolume(100);
     }
 
+    /**
+     * Function triggered by the rewind button mouseDown event that mimics rewind functionality.
+     * When the button is held-down the function retrieves the current time of the video then
+     * subtracts from that value to seek backwards on the player on an interval.
+     */
     onBackward() {
-        console.log('reverse');
+        
         let time = this.state.player.getCurrentTime();
         this.state.player.setVolume(50);
         this.state.interval = setInterval(() => {
@@ -189,17 +221,27 @@ componentWillMount() {
         }, 90)
     }
 
+    /**
+     * Function triggered by the mouseUp event of the rewind button that clears the interval, triggers 
+     * the video to play again, and restores the volume of the player.
+     */
     onStopBackward() {
         clearInterval(this.state.interval);
         this.state.player.playVideo();
         this.state.player.setVolume(100);
     }
 
+    /**
+     * Function called any time the state of the player changes to "1", which is the
+     * event code for "playing" for the YouTube API player. The function retrieves
+     * the url from the current song, then extracts the videoId and assigns it to the state
+     * as urlId so that the currently playing song will be highlighted in the list of songs.
+     */
     checkVid(event){
         if(event.data === 1){
             let urlId = this.state.player.getVideoUrl();
             urlId = urlId.replace('https://www.youtube.com/watch?v=','')
-            console.log(urlId);
+            
             if(this.state.currentSong !== urlId){
                 this.setState({
                     currentSong: urlId,
@@ -208,6 +250,10 @@ componentWillMount() {
         }
     }
 
+    /**
+     * Function triggered by the flip tape button that loads the opposite side of the 
+     * tape's list of songs into the YouTube Player API.
+     */
     onFlip(){
         if(this.state.sidePlaying[0] === this.state.aSideLinks[0]){
             let sideB = this.state.bSideLinks;
@@ -221,13 +267,53 @@ componentWillMount() {
                 sidePlaying: sideA,
             })
             this.state.player.loadPlaylist({ playlist: sideA });
-        } 
+        }      
     }
     
-    pageRefresh(){
-        location.reload()
-    }
+    /**
+     * Function called to refresh the page and load a mix when a playlist is
+     * clicked.
+     */
+    tapeRefresh(event){
+        
+        // location.reload()
+        
+        this.state.userPlaylists.forEach((playlist) => {
+            
+            if (playlist['_id'] === Number(event.currentTarget.id) && playlist.aSideLinks !== undefined) {
+                let aVideoArray = [];
+                let bVideoArray = [];
+                let aTitleArray = [];
+                let bTitleArray = [];
+                let aSideLinks = JSON.parse(playlist.aSideLinks);
+                let bSideLinks = JSON.parse(playlist.bSideLinks);
+                aSideLinks.forEach(video => {
+                    aVideoArray.push(video.id.videoId);
+                    aTitleArray.push(video.snippet.title);
+                })
+                bSideLinks.forEach(video => {
+                    bVideoArray.push(video.id.videoId);
+                    bTitleArray.push(video.snippet.title);
+                })
+                this.setState({
+                    aSideLinks: aVideoArray,
+                    bSideLinks: bVideoArray,
+                    aSideTitles: aTitleArray,
+                    bSideTitles: bTitleArray,
+                    tapeCover: playlist.tapeDeck,
+                    sidePlaying: aVideoArray,
+                    tapeTitle: playlist.tapeLabel
+               });
+                this.state.player.loadPlaylist({ playlist: aVideoArray });
+            }
+    })
+}
+    
 
+    /**
+     * Function triggered by the share mixtape button that determines whether or not the
+     *  mixtape's link is visible in the playlist. 
+     */
     onToggleShareLink() {
         this.setState({
             toggleLink: true,
@@ -235,8 +321,6 @@ componentWillMount() {
     }
 
     render (){
-
-        const { onDeckSideA, onDeckSideB } = this.props;
 
         const { aSideLinks, bSideLinks, aSideTitles, bSideTitles, tapeCover, userPlaylists, tapeTitle, currentSong, userName, currentPlaylistId, toggleLink} = this.state;
 
@@ -255,7 +339,7 @@ componentWillMount() {
                 </div>
 
                 <PlayerSongList onFlip={this.onFlip} currentSong={currentSong} aSideLinks={aSideLinks} bSideLinks={bSideLinks} aSideTitles={aSideTitles} bSideTitles={bSideTitles} currentPlaylistId={currentPlaylistId} toggleLink={toggleLink} onToggleLink={this.onToggleShareLink} />
-                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} pageRefresh={this.pageRefresh} />
+                <UserMixtapesList userPlaylists={userPlaylists} userName={userName} tapeRefresh={this.tapeRefresh} />
         </div>
         )
     };

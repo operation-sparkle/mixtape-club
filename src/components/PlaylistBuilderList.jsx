@@ -4,7 +4,7 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const PlaylistBuilderList = (props) => {
     const { builderImage, tapeLabel, sideA , sideB, onSaveImage, onSavePlaylist, onDelete } = props;
-    console.log(sideA);
+    
     return (
         <div className="border border-info playlist-builder shadow-sm p-3 mb-5 bg-white rounded">
         <div className="row">
