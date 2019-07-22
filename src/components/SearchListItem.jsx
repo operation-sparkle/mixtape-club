@@ -9,6 +9,7 @@ const SearchListItem = (props) => {
    
     let title = searchResult.snippet.title.replace(/&amp;/g, '&');
     title = title.replace(/&#39;/g,'\'');
+    title = title.replace(/&quot;/g, '\"');
     return (
         <li onClick={()=>{onResultClick(searchResult)}} className="list-group-item search-item">{title}</li>
     )
