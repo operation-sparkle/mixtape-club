@@ -25,14 +25,14 @@ constructor(props){
     this.state = {
         player: null,
         playing: false,
-        aSideLinks: ["r52KqG4G678", "Rht7rBHuXW8"],
-        bSideLinks: ["H1Zm6E6Sy4Y", "fpsOOrwF558"],
+        aSideLinks: ["fi33-cITS0s"],
+        bSideLinks: ["H1Zm6E6Sy4Y"],
         interval: null,
         playListId: null || this.props.location,
-        aSideTitles: ['Make a new mixtape', 'or listen to a classic.'],
-        bSideTitles: ['placeholder'],
+        aSideTitles: ['Login to start making mixtapes of your own!'],
+        bSideTitles: ['Login to start making mixtapes of your own!'],
         tapeCover: LisaFrankenstein,
-        sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
+        sidePlaying: ["fi33-cITS0s"],
         googleId: null || this.props.googleId,
         userPlaylists: [],
         tapeTitle: 'Operation Sparkle',
@@ -85,7 +85,7 @@ componentWillMount() {
         })
         .then((response) => {
             const {data} = response;
-         
+            
             let aVideoArray = [];
             let bVideoArray = [];
             let aTitleArray = [];
@@ -95,17 +95,18 @@ componentWillMount() {
             this.setState({
                 userPlaylists: data.response,
                 userName: data.displayName,
+            })
+            if(!this.state.currentPlaylistId){
+                aSide.forEach(video => {
+                    aVideoArray.push(video.id.videoId);
+                    aTitleArray.push(video.snippet.title);
+                })
+                bSide.forEach(video => {
+                    bVideoArray.push(video.id.videoId);
+                    bTitleArray.push(video.snippet.title);
+                })
+                this.setState({
                 currentPlaylistId: data.response[0]._id,
-            })
-            aSide.forEach(video => {
-                aVideoArray.push(video.id.videoId);
-                aTitleArray.push(video.snippet.title);
-            })
-            bSide.forEach(video => {
-                bVideoArray.push(video.id.videoId);
-                bTitleArray.push(video.snippet.title);
-            })
-            this.setState({
                 aSideLinks: aVideoArray,
                 bSideLinks: bVideoArray,
                 aSideTitles: aTitleArray,
@@ -115,6 +116,7 @@ componentWillMount() {
                 tapeTitle: data.response[0].tapeLabel
             })
             this.state.player.loadPlaylist({ playlist: this.state.sidePlaying });
+        }
         })
         .catch((err) => {
             console.error('Error searching:', err)
