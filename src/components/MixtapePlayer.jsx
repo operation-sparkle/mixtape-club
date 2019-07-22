@@ -29,13 +29,13 @@ constructor(props){
         bSideLinks: ["H1Zm6E6Sy4Y", "fpsOOrwF558"],
         interval: null,
         playListId: null || this.props.location,
-        aSideTitles: ['placeholder', 'spaceholder'],
+        aSideTitles: ['Make a new mixtape', 'or listen to a classic.'],
         bSideTitles: ['placeholder'],
         tapeCover: LisaFrankenstein,
         sidePlaying: ["r52KqG4G678", "Rht7rBHuXW8"],
         googleId: null || this.props.googleId,
         userPlaylists: [],
-        tapeTitle: 'Untitled',
+        tapeTitle: 'Operation Sparkle',
         currentSong: "",
         userName: '',
         currentPlaylistId: '',
@@ -85,12 +85,36 @@ componentWillMount() {
         })
         .then((response) => {
             const {data} = response;
-  
+         
+            let aVideoArray = [];
+            let bVideoArray = [];
+            let aTitleArray = [];
+            let bTitleArray = [];
+            let aSide = JSON.parse(data.response[0].aSideLinks);
+            let bSide = JSON.parse(data.response[0].bSideLinks);
             this.setState({
                 userPlaylists: data.response,
                 userName: data.displayName,
-                // currentPlaylistId: data.response[0]._id,
+                currentPlaylistId: data.response[0]._id,
             })
+            aSide.forEach(video => {
+                aVideoArray.push(video.id.videoId);
+                aTitleArray.push(video.snippet.title);
+            })
+            bSide.forEach(video => {
+                bVideoArray.push(video.id.videoId);
+                bTitleArray.push(video.snippet.title);
+            })
+            this.setState({
+                aSideLinks: aVideoArray,
+                bSideLinks: bVideoArray,
+                aSideTitles: aTitleArray,
+                bSideTitles: bTitleArray,
+                tapeCover: data.response[0].tapeDeck,
+                sidePlaying: aVideoArray,
+                tapeTitle: data.response[0].tapeLabel
+            })
+            this.state.player.loadPlaylist({ playlist: this.state.sidePlaying });
         })
         .catch((err) => {
             console.error('Error searching:', err)
@@ -276,8 +300,8 @@ componentWillMount() {
     }
     
     /**
-     * Function called to refresh the page and load a mix when a playlist is
-     * clicked.
+     * Function called to switch between playlists. Retrieves the playlist by 
+     * matching the id of the clicked element and the id of the playlist.
      */
     tapeRefresh(event){
         

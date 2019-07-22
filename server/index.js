@@ -123,13 +123,15 @@ app.get('/getUser', (req, res) => {
  */
 
 app.get('/userPlaylists', (req, res) => {
-  const { id, displayName } = req.user;
-  console.log(displayName);
-  db.getAllPlaylists({ userId: id }, (info, response) => {
-    console.log(response);
-    const data = { response, displayName };
-    res.send(data);
-  });
+  if (req.user) {
+    const { id, displayName } = req.user;
+    console.log(displayName);
+    db.getAllPlaylists({ userId: id }, (info, response) => {
+      console.log(response);
+      const data = { response, displayName };
+      res.send(data);
+    });
+  }
 });
 
 /**
@@ -222,7 +224,7 @@ app.post('/getLink', (req, res) => {
 });
 
 /**
- * Post request used to load information onto mixtape-player 
+ * Post request used to load information onto mixtape-player
  * retrieves info from database to render on screen
  */
 
