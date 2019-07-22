@@ -12,6 +12,7 @@ const SearchPlayer = (props) => {
 
     let title = selectedResult.snippet.title.replace(/&amp;/g, '&');
     title = title.replace(/&#39;/g, '\'');
+    title = title.replace(/&quot;/g, '\"');
 
     const iconStyle = {
         fontSize: '2.5rem',
